@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ʻAmakihi survey</title>
+<meta name="description" content="ʻAmakihi: a six-year community survey of stars and their planets with simultaneous optical and near-infrared spectropolarimetry (Wenaokeao: ESPaDOnS + SPIRou) at the Canada-France-Hawaii Telescope.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230d1726'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23cfdc4f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbfaf6;
+    --surface: #ffffff;
+    --ink: #18202b;
+    --muted: #5a6370;
+    --line: #e3e1d8;
+    --accent: #5d6e0f;
+    --accent-soft: #eef2d3;
+    --hero-bg: #0d1726;
+    --hero-bg-2: #15263d;
+    --hero-ink: #eef1e6;
+    --hero-muted: #a9b3bf;
+    --hero-accent: #cfdc4f;
+    --ir: #6b5a66;
+    --radius: 14px;
+    --maxw: 1080px;
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1620;
+      --surface: #151e2a;
+      --ink: #e7eae3;
+      --muted: #9ea8b3;
+      --line: #253140;
+      --accent: #c9d65a;
+      --accent-soft: #222d1d;
+      --hero-bg: #0a111c;
+      --hero-bg-2: #111d2f;
+      --ir: #7d6c78;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 1.0625rem/1.65 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-underline-offset: 0.18em; }
+  a:hover { text-decoration-thickness: 2px; }
+  img { max-width: 100%; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 720px) { .wrap { padding: 0 32px; } }
+
+  /* Header and hero */
+  .hero {
+    color: var(--hero-ink);
+    background:
+      radial-gradient(1.5px 1.5px at 12% 22%, rgba(255,255,255,.75), transparent 60%),
+      radial-gradient(1px 1px at 27% 68%, rgba(255,255,255,.55), transparent 60%),
+      radial-gradient(1.5px 1.5px at 41% 14%, rgba(255,255,255,.6), transparent 60%),
+      radial-gradient(1px 1px at 58% 47%, rgba(255,255,255,.5), transparent 60%),
+      radial-gradient(1.5px 1.5px at 73% 76%, rgba(255,255,255,.65), transparent 60%),
+      radial-gradient(1px 1px at 88% 31%, rgba(255,255,255,.55), transparent 60%),
+      radial-gradient(1px 1px at 94% 88%, rgba(255,255,255,.45), transparent 60%),
+      radial-gradient(1px 1px at 6% 84%, rgba(255,255,255,.45), transparent 60%),
+      radial-gradient(60% 90% at 88% 0%, rgba(207,220,79,.16), transparent 70%),
+      linear-gradient(180deg, var(--hero-bg), var(--hero-bg-2));
+  }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 18px 0;
+  }
+  .brand {
+    font: 600 1.25rem/1 var(--serif); color: var(--hero-ink); text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav { display: flex; align-items: center; gap: 22px; }
+  .nav a.link { color: var(--hero-muted); text-decoration: none; font-size: 0.94rem; }
+  .nav a.link:hover { color: var(--hero-ink); }
+  @media (max-width: 680px) { .nav a.link { display: none; } }
+
+  .btn-members {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 999px;
+    border: 1px solid rgba(207,220,79,.55);
+    color: var(--hero-accent); text-decoration: none;
+    font-size: 0.92rem; font-weight: 500; white-space: nowrap;
+  }
+  .btn-members:hover { background: rgba(207,220,79,.12); }
+  .btn-members svg { width: 16px; height: 16px; flex: none; }
+
+  .hero-body { padding: 40px 0 56px; }
+  @media (min-width: 720px) { .hero-body { padding: 64px 0 80px; } }
+  .hero-grid { display: grid; gap: 32px; align-items: center; }
+  @media (min-width: 900px) { .hero-grid { grid-template-columns: 1.1fr 1fr; gap: 48px; } }
+  .eyebrow a { color: inherit; text-decoration: none; }
+  .eyebrow a:hover { text-decoration: underline; }
+  .eyebrow {
+    margin: 0 0 14px; color: var(--hero-accent);
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  h1 {
+    margin: 0; font: 600 clamp(3.2rem, 11vw, 5.6rem)/1 var(--serif);
+    letter-spacing: -0.01em;
+  }
+  .acronym {
+    margin: 18px 0 0; max-width: 40rem;
+    font: 400 clamp(1.05rem, 2.6vw, 1.25rem)/1.45 var(--serif); color: var(--hero-muted);
+  }
+  .acronym b { color: var(--hero-ink); font-weight: 600; }
+  .lead { margin: 24px 0 0; max-width: 42rem; font-size: 1.1rem; color: var(--hero-ink); }
+
+  .photo { margin: 0; }
+  .photo img {
+    display: block; width: 100%; height: auto; border-radius: var(--radius);
+  }
+  .hero .photo img { aspect-ratio: 4 / 3; object-fit: cover; box-shadow: 0 24px 60px rgba(0,0,0,.4); }
+  .photo figcaption { margin-top: 10px; font-size: 0.8rem; line-height: 1.45; color: var(--muted); }
+  .hero .photo figcaption { color: var(--hero-muted); }
+  .photo figcaption a { color: inherit; }
+
+  .facts {
+    margin: 44px 0 0; padding: 0; display: grid; gap: 1px;
+    grid-template-columns: repeat(2, 1fr);
+    border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); overflow: hidden;
+    background: rgba(255,255,255,.12);
+  }
+  @media (min-width: 760px) { .facts { grid-template-columns: repeat(4, 1fr); } }
+  .facts div { background: rgba(13,23,38,.82); padding: 16px 18px; }
+  .facts dt { font: 600 1.45rem/1.2 var(--serif); color: var(--hero-ink); }
+  .facts dd { margin: 4px 0 0; font-size: 0.86rem; color: var(--hero-muted); line-height: 1.4; }
+
+  /* Sections */
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  @media (min-width: 720px) { section { padding: 84px 0; } }
+  h2 {
+    margin: 0 0 8px; font: 600 clamp(1.7rem, 4vw, 2.3rem)/1.15 var(--serif);
+  }
+  .kicker {
+    margin: 0 0 10px; color: var(--accent);
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .intro { max-width: 46rem; color: var(--muted); margin: 0 0 32px; }
+  h3 { margin: 0 0 8px; font: 600 1.2rem/1.3 var(--serif); }
+  p { margin: 0 0 14px; }
+
+  /* Spectrum figure (log wavelength axis, 0.35 to 2.6 um) */
+  .note {
+    max-width: 46rem; margin: 0 0 8px; padding: 18px 22px;
+    background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+  }
+  .note h3 { font-size: 1.1rem; margin-bottom: 6px; }
+  .note p { color: var(--muted); font-size: 0.97rem; }
+  .note p:last-child { margin-bottom: 0; }
+  .spectrum { margin: 8px 0 0; padding: 26px 0 0; }
+  .bands, .ticks { position: relative; height: 1.5rem; }
+  .bands span, .ticks span {
+    position: absolute; transform: translateX(-50%); white-space: nowrap;
+  }
+  .bands span { font: 600 0.85rem/1.5rem var(--sans); color: var(--muted); }
+  .ticks span { font-size: 0.78rem; line-height: 1.6rem; color: var(--muted); }
+  .bar {
+    height: 18px; border-radius: 9px;
+    background: linear-gradient(90deg,
+      #3b2a6e 0%, #6a3d9a 4.1%, #2f6fd6 13.6%, #1fa3a3 17.8%, #3aa635 20.7%,
+      #e8d13a 25.6%, #ee8a2c 28.5%, #d7372f 33.1%, #8c2b2b 38%,
+      var(--ir) 50%, var(--ir) 100%);
+  }
+  .inst .row { position: relative; height: 2.6rem; }
+  .inst .range {
+    position: absolute; top: 0.5rem; height: 6px; border-radius: 3px; background: var(--accent);
+  }
+  .inst .lbl {
+    position: absolute; top: 0.95rem; white-space: nowrap;
+    font-size: 0.86rem; color: var(--ink);
+  }
+  .inst .lbl b { font-weight: 600; }
+  .spectrum figcaption { margin-top: 14px; max-width: 46rem; color: var(--muted); font-size: 0.95rem; }
+
+  /* Grids and cards */
+  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+  .grid-2 { display: grid; gap: 28px 40px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .points { display: grid; gap: 28px 36px; grid-template-columns: 1fr; margin-top: 40px; }
+  @media (min-width: 640px) { .points { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1000px) { .points { grid-template-columns: repeat(4, 1fr); } }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px 22px 18px; display: flex; flex-direction: column;
+  }
+  .card p { color: var(--muted); font-size: 0.98rem; }
+  .wp-num {
+    align-self: flex-start; margin: 0 0 12px; padding: 3px 10px; border-radius: 999px;
+    background: var(--accent-soft); color: var(--accent);
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+  }
+  .tags { list-style: none; margin: auto 0 0; padding: 6px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags li {
+    font-size: 0.78rem; color: var(--muted); border: 1px solid var(--line);
+    padding: 2px 9px; border-radius: 999px;
+  }
+
+  .questions { list-style: none; margin: 0; padding: 0; counter-reset: q; display: grid; gap: 14px; max-width: 50rem; }
+  .questions li {
+    counter-increment: q; position: relative; padding: 14px 18px 14px 58px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  }
+  .questions li::before {
+    content: counter(q); position: absolute; left: 18px; top: 13px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent);
+    font: 600 0.85rem/26px var(--sans); text-align: center;
+  }
+
+  .point h3 { font-size: 1.08rem; }
+  .point p { color: var(--muted); font-size: 0.98rem; }
+
+  .checklist { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+  .checklist li { position: relative; padding-left: 26px; color: var(--muted); }
+  .checklist li::before {
+    content: ""; position: absolute; left: 4px; top: 0.62em; width: 9px; height: 9px;
+    border-radius: 50%; background: var(--accent);
+  }
+  .checklist b { color: var(--ink); font-weight: 600; }
+
+  /* Name section */
+  .name-grid { display: grid; gap: 32px; align-items: center; }
+  @media (min-width: 760px) { .name-grid { grid-template-columns: 1.4fr 1fr; gap: 56px; } }
+  .name-grid .photo { max-width: 380px; }
+  .name-grid p { color: var(--muted); }
+  .okina-word { font-family: var(--serif); font-weight: 600; color: var(--ink); }
+
+  /* Members panel */
+  .members {
+    margin: 0; padding: 30px; border-radius: var(--radius);
+    background: linear-gradient(135deg, var(--hero-bg), var(--hero-bg-2));
+    color: var(--hero-ink);
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .members h2 { margin-bottom: 6px; font-size: 1.6rem; }
+  .members p { margin: 0; color: var(--hero-muted); max-width: 36rem; }
+  .members .btn-members { padding: 11px 18px; font-size: 1rem; }
+  .members-links { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .members .wiki-link { color: var(--hero-muted); font-size: 0.9rem; }
+
+  footer { padding: 36px 0 48px; color: var(--muted); font-size: 0.9rem; }
+  footer p { margin: 0 0 6px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="#top" id="top">ʻAmakihi</a>
+      <nav class="nav" aria-label="Main">
+        <a class="link" href="#science">Science</a>
+        <a class="link" href="#work-packages">Work packages</a>
+        <a class="link" href="#legacy">Data</a>
+        <a class="link" href="#team">Team</a>
+        <a class="link" href="publications.html">Publications</a>
+        <a class="link" href="https://www.cfht.hawaii.edu/">CFHT</a>
+        <a class="btn-members" href="team/" title="Team pages, password protected">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
+          Members
+        </a>
+      </nav>
+    </div>
+
+    <div class="hero-body">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">A community survey at the <a href="https://www.cfht.hawaii.edu/">Canada-France-Hawaii Telescope</a></p>
+          <h1>ʻAmakihi</h1>
+          <p class="acronym">
+            <b>A</b>ctivity, <b>M</b>agnetism, <b>A</b>tmospheres and <b>K</b>eplerian
+            <b>I</b>nvestigations of <b>H</b>ost stars and <b>I</b>nteractions
+          </p>
+          <p class="lead">
+            A six-year survey of stars and their planets with Wenaokeao, the simultaneous
+            use of ESPaDOnS and SPIRou at CFHT: every visit records the full optical and
+            near-infrared spectrum of a star, in polarized light, at high resolution.
+          </p>
+        </div>
+        <figure class="photo">
+          <img src="img/amakihi_puu_laau.jpg" width="1200" height="900"
+               alt="A bright yellow Hawaiʻi ʻamakihi perched on a branch, against a soft green forest background.">
+          <figcaption>Hawaiʻi ʻamakihi (<i>Chlorodrepanis virens</i>) at Puʻu Laʻau, on the slopes of Maunakea, August 2015. Photo: Étienne Artigau, <a href="https://macaulaylibrary.org/asset/22535891">Macaulay Library ML22535891</a>.</figcaption>
+        </figure>
+      </div>
+      <dl class="facts">
+        <div><dt>6 years</dt><dd>12 semesters of monitoring, snapshots and time-critical sequences</dd></div>
+        <div><dt>0.37 to 2.45 µm</dt><dd>in a single exposure, from the blue to the K band</dd></div>
+        <div><dt>R ≈ 70 000</dt><dd>spectral resolution, with circular and linear polarimetry</dd></div>
+        <div><dt>5 work packages</dt><dd>from the nearest exoplanets to evolved stars</dd></div>
+      </dl>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="instrument">
+  <div class="wrap">
+    <p class="kicker">The instrument</p>
+    <h2>One exposure, two spectrographs</h2>
+    <p class="intro">
+      <a href="https://www.cfht.hawaii.edu/Instruments/Spectroscopy/Espadons/">ESPaDOnS</a>
+      covers the optical domain and
+      <a href="https://www.cfht.hawaii.edu/Instruments/SPIRou/">SPIRou</a> the near-infrared.
+      Both are spectropolarimeters. Observed together on the 3.6 m telescope on Maunakea,
+      they give a continuous, simultaneous view of thousands of spectral lines, which
+      ʻAmakihi will exploit systematically for the first time.
+    </p>
+
+    <aside class="note" aria-labelledby="wenaokeao">
+      <h3 id="wenaokeao">Wenaokeao</h3>
+      <p>Wenaokeao (formerly VISION) is the optomechanical interface at CFHT's Cassegrain focus on which ESPaDOnS and SPIRou are mounted together. It lets the two spectrographs observe the same star at the same time (Mode 3), or each one on its own (Modes 1 and 2). ʻAmakihi is designed around the simultaneous mode, as set out in CFHT's <a href="https://www.cfht.hawaii.edu/en/science/CommunitySurvey/CS-CfP/">Community Survey call</a>.</p>
+      <p>Wenaokeao has no dedicated paper yet. The spectrographs are described in <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/staa2569%22">Donati et al. (2020)</a> for SPIRou, and in <a href="https://ui.adsabs.harvard.edu/abs/2003ASPC..307...41D/abstract">Donati (2003)</a> and <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1117/12.458230%22">Manset &amp; Donati (2003)</a> for ESPaDOnS; the SPIRou pipeline, APERO, in <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1088/1538-3873/ac9e74%22">Cook et al. (2022)</a>. Recent work with both instruments is collected on the <a href="publications.html">publications page</a>.</p>
+    </aside>
+
+    <figure class="spectrum" role="img" aria-label="Wavelength coverage on a logarithmic scale: ESPaDOnS from 0.37 to 1.05 micrometres and SPIRou from 0.95 to 2.45 micrometres, observed simultaneously.">
+      <div aria-hidden="true">
+        <div class="bands">
+          <span style="left:11.41%">B</span><span style="left:22.54%">V</span><span style="left:30.1%">R</span><span style="left:41.22%">I</span><span style="left:53.83%">Y</span><span style="left:63.48%">J</span><span style="left:76.72%">H</span><span style="left:91.67%">K</span>
+        </div>
+        <div class="bar"></div>
+        <div class="ticks">
+          <span style="left:6.66%">0.4</span><span style="left:17.79%">0.5</span><span style="left:26.88%">0.6</span><span style="left:41.22%">0.8</span><span style="left:52.35%">1.0</span><span style="left:72.57%">1.5</span><span style="left:86.92%">2.0 µm</span>
+        </div>
+        <div class="inst">
+          <div class="row"><div class="range" style="left:2.77%;width:52.01%"></div><span class="lbl" style="left:2.77%"><b>ESPaDOnS</b>, 0.37 to 1.05 µm</span></div>
+          <div class="row"><div class="range" style="left:49.79%;width:47.24%"></div><span class="lbl" style="left:49.79%"><b>SPIRou</b>, 0.95 to 2.45 µm</span></div>
+        </div>
+      </div>
+      <figcaption>Wavelength coverage of Wenaokeao (logarithmic scale). Each visit yields an optical and a near-infrared spectrum taken at the same moment, by default in spectropolarimetric mode.</figcaption>
+    </figure>
+
+    <div class="points">
+      <div class="point">
+        <h3>Activity, recorded at the same moment</h3>
+        <p>Optical activity indicators (Ca II H&amp;K, Hα, Na D) are measured at the exact time of each near-infrared radial velocity, so stellar activity can be modelled and separated from planetary signals.</p>
+      </div>
+      <div class="point">
+        <h3>A chromatic lever arm</h3>
+        <p>Velocity shifts caused by stellar activity depend on wavelength; those caused by planets do not. A baseline from 0.37 to 2.45 µm separates the two.</p>
+      </div>
+      <div class="point">
+        <h3>Magnetic fields across the spectrum</h3>
+        <p>Zeeman signatures from thousands of lines in both domains, with the stronger Zeeman broadening of the infrared, constrain both large-scale and small-scale magnetic fields.</p>
+      </div>
+      <div class="point">
+        <h3>Homogeneous by design</h3>
+        <p>One observing mode across all work packages, so every star observed feeds the same uniform legacy dataset.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="science">
+  <div class="wrap">
+    <p class="kicker">Science</p>
+    <h2>The questions</h2>
+    <p class="intro">ʻAmakihi brings together stellar and exoplanet science around a few broad questions.</p>
+    <ol class="questions">
+      <li>Which planets, and in particular which temperate rocky planets, orbit the stars closest to the Sun, and in what kind of systems?</li>
+      <li>What are exoplanets made of, and how did they form?</li>
+      <li>How diverse are the dynamics and the chemistry of exoplanet atmospheres?</li>
+      <li>What role do magnetic fields play in the formation of stars and planets, and along stellar evolution?</li>
+    </ol>
+  </div>
+</section>
+
+<section id="work-packages">
+  <div class="wrap">
+    <p class="kicker">Organisation</p>
+    <h2>Five work packages</h2>
+    <p class="intro">Each work package defines its own sample, observing strategy and analysis, while sharing data and methods with the others: exoplanet hosts need well-characterised stars, and stellar studies use every star the survey observes.</p>
+    <div class="grid">
+      <article class="card">
+        <p class="wp-num">WP1</p>
+        <h3>Nearby exoplanets</h3>
+        <p>Complete the census of small planets around the nearest M and K dwarfs, within 10 pc: the systems that the coming extremely large telescopes will be able to characterise. A second axis follows systems hosting a massive outer planet, including those revealed by Gaia, to learn how inner rocky planets form alongside giants.</p>
+        <ul class="tags"><li>Near-infrared velocimetry</li><li>Solar neighbourhood</li><li>Gaia DR4</li></ul>
+      </article>
+      <article class="card">
+        <p class="wp-num">WP2</p>
+        <h3>Planetary interiors</h3>
+        <p>Measure the masses of transiting planets. One programme builds the first mass-metallicity relation for giant planets around M dwarfs, a direct test of how giant planets form around low-mass stars. Another delivers the precise masses that Ariel and PLATO targets need for their atmospheres and interiors to be interpreted.</p>
+        <ul class="tags"><li>Transiting planets</li><li>Ariel and PLATO</li><li>Giant planet formation</li></ul>
+      </article>
+      <article class="card">
+        <p class="wp-num">WP3</p>
+        <h3>Young magnetic stars and planet formation</h3>
+        <p>Monitor a sample of young pre-main-sequence stars, from 0.3 to 4 solar masses, over several seasons: map how their magnetic fields evolve and channel accretion from the disk, and search for massive young planets in the inner disk.</p>
+        <ul class="tags"><li>Zeeman-Doppler imaging</li><li>Magnetospheric accretion</li><li>Young planets</li></ul>
+      </article>
+      <article class="card">
+        <p class="wp-num">WP4</p>
+        <h3>Exoplanet atmospheres</h3>
+        <p>Study hot Jupiters in three dimensions, search for the polarisation signature of exoplanet magnetic fields, follow hydrogen and helium escape together with stellar activity, and prepare reflected-light spectroscopy for the ELT era.</p>
+        <ul class="tags"><li>High-resolution spectroscopy</li><li>Atmospheric escape</li><li>Planetary magnetism</li></ul>
+      </article>
+      <article class="card">
+        <p class="wp-num">WP5</p>
+        <h3>Stellar magnetism across the HR diagram</h3>
+        <p>Follow magnetism through the life of stars: young cool stars in their first billion years, pulsating stars where asteroseismology probes the interior, and evolved supergiants and AGB stars. WP5 also derives the magnetic diagnostics of the stars observed by the exoplanet work packages.</p>
+        <ul class="tags"><li>Spectropolarimetry</li><li>Asteroseismology</li><li>Stellar evolution</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="legacy">
+  <div class="wrap">
+    <p class="kicker">Data</p>
+    <h2>A legacy dataset</h2>
+    <p class="intro">Beyond its own science goals, ʻAmakihi will leave the community a homogeneous set of high-resolution polarized spectra of several hundred stars, with long time series for many of them.</p>
+    <ul class="checklist" style="max-width:48rem">
+      <li><b>Reduced spectra</b> and their metadata distributed through the Canadian Astronomy Data Centre (CADC); spectropolarimetric data through PolarBase.</li>
+      <li><b>Value-added products</b>: spectral templates, co-added spectra, line-by-line velocities, activity indicators and magnetic diagnostics.</li>
+      <li><b>Radial-velocity time series</b> follow CFHT's proprietary-period policy; products useful to independent science are released progressively.</li>
+      <li><b>Background</b>: the ESPaDOnS and SPIRou work the survey builds on is listed on the <a href="publications.html">publications page</a>.</li>
+      <li><b>Support to CFHT operations</b>: pipeline development for Wenaokeao, scheduling and survey-monitoring tools, and regular follow-up of data quality.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <p class="kicker">Team</p>
+    <h2>The people</h2>
+    <div class="grid-2">
+      <div>
+        <p>ʻAmakihi gathers the ESPaDOnS and SPIRou user communities: about 130 researchers from nearly 50 institutes, mostly in France and Canada, with colleagues from Brazil, Hawaiʻi and elsewhere. Many of them built these instruments, their pipelines and their operations.</p>
+        <p>The survey is run by a steering committee that includes the work package leads, representatives of the participating agencies and of CFHT.</p>
+      </div>
+      <ul class="checklist">
+        <li><b>Yearly workshops</b> open to the whole community, alternating between France and Canada, with remote participation.</li>
+        <li><b>Early-career researchers</b>: a few hours per semester open to an internal call for projects compatible with the survey plan.</li>
+        <li><b>Students from Hawaiʻi</b> are welcome to be trained and involved in survey operations and science.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="name">
+  <div class="wrap">
+    <div class="name-grid">
+      <div>
+        <p class="kicker">The name</p>
+        <h2>Why ʻAmakihi?</h2>
+        <p>Every ʻAmakihi spectrum is taken from the summit of Maunakea, and a Hawaiian name is our way of honouring the place that makes the survey possible.</p>
+        <p>The <span class="okina-word">ʻamakihi</span> is a small yellow-green honeycreeper and one of the most common of Hawaiʻi's native birds: where many native species have vanished, it has weathered the upheavals of the islands remarkably well. Keep an eye out for one in the māmane trees on the slopes of Maunakea.</p>
+        <p>Its name also reads as an acronym for the survey's themes: <em>Activity, Magnetism, Atmospheres and Keplerian Investigations of Host stars and Interactions</em>.</p>
+      </div>
+      <figure class="photo">
+        <img src="img/amakihi_puu_oo.jpg" width="800" height="1200" loading="lazy"
+             alt="A Hawaiʻi ʻamakihi foraging head down on a lichen-covered trunk.">
+        <figcaption>Hawaiʻi ʻamakihi foraging on a lichen-covered trunk, Puʻu ʻŌʻō trail, island of Hawaiʻi, May 2018. Photo: Étienne Artigau, <a href="https://macaulaylibrary.org/asset/102747991">Macaulay Library ML102747991</a>.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="members" style="border-bottom:0">
+  <div class="wrap">
+    <div class="members">
+      <div>
+        <h2>Members' area</h2>
+        <p>Organisation, data, decisions and working notes are kept in a private wiki, readable on password-protected team pages. Editing the wiki requires a GitHub account invited to the project.</p>
+      </div>
+      <div class="members-links">
+        <a class="btn-members" href="team/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
+          Team pages
+        </a>
+        <a class="wiki-link" href="https://github.com/eartigau/amakihi/wiki">Edit the wiki on GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>ʻAmakihi · a Wenaokeao community survey at the <a href="https://www.cfht.hawaii.edu/">Canada-France-Hawaii Telescope</a>, Maunakea, Hawaiʻi · <a href="publications.html">Publications</a></p>
+    <p>Page updated November 2026.</p>
+  </div>
+</footer>
+
+</body>
+</html>

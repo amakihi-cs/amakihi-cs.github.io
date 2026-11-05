@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ʻAmakihi publications</title>
+<meta name="description" content="Publications of the ʻAmakihi community survey and the recent ESPaDOnS and SPIRou work it builds on.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230d1726'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23cfdc4f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbfaf6; --surface: #ffffff; --ink: #18202b; --muted: #5a6370; --line: #e3e1d8;
+    --accent: #5d6e0f; --accent-soft: #eef2d3;
+    --hero-bg: #0d1726; --hero-bg-2: #15263d; --hero-ink: #eef1e6; --hero-muted: #a9b3bf; --hero-accent: #cfdc4f;
+    --radius: 14px;
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1620; --surface: #151e2a; --ink: #e7eae3; --muted: #9ea8b3; --line: #253140;
+      --accent: #c9d65a; --accent-soft: #222d1d; --hero-bg: #0a111c; --hero-bg-2: #111d2f;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.0625rem/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent); text-underline-offset: 0.18em; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 720px) { .wrap { padding: 0 32px; } }
+
+  .hero { color: var(--hero-ink); background: radial-gradient(60% 90% at 88% 0%, rgba(207,220,79,.14), transparent 70%), linear-gradient(180deg, var(--hero-bg), var(--hero-bg-2)); }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; }
+  .brand { font: 600 1.25rem/1 var(--serif); color: var(--hero-ink); text-decoration: none; }
+  .nav { display: flex; align-items: center; gap: 22px; }
+  .nav a.link { color: var(--hero-muted); text-decoration: none; font-size: 0.94rem; }
+  .nav a.link:hover, .nav a.link[aria-current] { color: var(--hero-ink); }
+  @media (max-width: 680px) { .nav a.link { display: none; } }
+  .btn-members {
+    display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px;
+    border: 1px solid rgba(207,220,79,.55); color: var(--hero-accent); text-decoration: none;
+    font-size: 0.92rem; font-weight: 500; white-space: nowrap;
+  }
+  .btn-members:hover { background: rgba(207,220,79,.12); }
+  .btn-members svg { width: 16px; height: 16px; flex: none; }
+  .hero-body { padding: 36px 0 48px; }
+  .eyebrow { margin: 0 0 12px; color: var(--hero-accent); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+  .hero h1 { margin: 0; font: 600 clamp(2.4rem, 8vw, 4rem)/1.05 var(--serif); }
+  .hero p.lead { margin: 14px 0 0; max-width: 44rem; color: var(--hero-muted); }
+
+  section.part { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  .kicker { margin: 0 0 10px; color: var(--accent); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+  h2 { margin: 0 0 10px; font: 600 clamp(1.7rem, 4vw, 2.2rem)/1.15 var(--serif); }
+  .intro { max-width: 46rem; color: var(--muted); margin: 0 0 24px; }
+  .empty { background: var(--surface); border: 1px dashed var(--line); border-radius: var(--radius); padding: 22px; color: var(--muted); max-width: 46rem; }
+  .empty p { margin: 0; }
+  .empty b { color: var(--ink); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 30px; }
+  .chip { display: inline-flex; gap: 8px; align-items: center; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; font-size: 0.88rem; }
+  .chip span { color: var(--accent); font-weight: 600; }
+  .chip:hover { border-color: var(--accent); }
+
+  .group { margin: 0 0 36px; scroll-margin-top: 16px; }
+  .group h3 { margin: 0 0 12px; font: 600 1.25rem/1.3 var(--serif); }
+  .refs { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .refs li { padding: 14px 20px; border-bottom: 1px solid var(--line); }
+  .refs li:last-child { border-bottom: 0; }
+  .ref-title { margin: 0 0 3px; font-weight: 500; }
+  .ref-meta { margin: 0; color: var(--muted); font-size: 0.9rem; overflow-wrap: break-word; }
+
+  footer { padding: 36px 0 48px; color: var(--muted); font-size: 0.9rem; }
+  footer p { margin: 0 0 6px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="./">ʻAmakihi</a>
+      <nav class="nav" aria-label="Main">
+        <a class="link" href="./#science">Science</a>
+        <a class="link" href="./#work-packages">Work packages</a>
+        <a class="link" href="publications.html" aria-current="page">Publications</a>
+        <a class="link" href="https://www.cfht.hawaii.edu/">CFHT</a>
+        <a class="btn-members" href="team/" title="Team pages, password protected">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
+          Members
+        </a>
+      </nav>
+    </div>
+    <div class="hero-body">
+      <p class="eyebrow">ʻAmakihi community survey</p>
+      <h1>Publications</h1>
+      <p class="lead">Papers from the survey, and the recent ESPaDOnS and SPIRou work it builds on. Links go to the NASA Astrophysics Data System (ADS) and to the journals.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="part" id="amakihi">
+    <div class="wrap">
+      <p class="kicker">Survey papers</p>
+      <h2>ʻAmakihi</h2>
+      <div class="empty"><p><b>Nothing yet.</b> ʻAmakihi observations have not started; papers based on survey data will be listed here.</p></div>
+    </div>
+  </section>
+
+  <section class="part" id="background" style="border-bottom:0">
+    <div class="wrap">
+      <p class="kicker">Background effort</p>
+      <h2>The work ʻAmakihi builds on</h2>
+      <p class="intro">95 papers published from 2021 to 2026 that use ESPaDOnS and SPIRou in the science areas of the survey, grouped by work package. This selection is not exhaustive; it was assembled from literature searches and from the references of the survey proposal.</p>
+      <nav class="chips" aria-label="Groups">
+      <a class="chip" href="#wp1">WP1 <span>20</span></a>
+      <a class="chip" href="#wp2">WP2 <span>7</span></a>
+      <a class="chip" href="#wp3">WP3 <span>26</span></a>
+      <a class="chip" href="#wp4">WP4 <span>10</span></a>
+      <a class="chip" href="#wp5">WP5 <span>27</span></a>
+      <a class="chip" href="#methods">Instruments, pipelines and methods <span>5</span></a>
+      </nav>
+    <section class="group" id="wp1">
+      <h3>WP1: Nearby exoplanets</h3>
+      <ol class="refs">
+        <li><p class="ref-title">SPIRou detects two planets around the nearby M4.5V star GJ 4274</p><p class="ref-meta">Charpentier, P.; Moutou, C.; Donati, J.F. et al. (2026), <i>Astronomy &amp; Astrophysics 705, A243</i> · <a href="https://ui.adsabs.harvard.edu/abs/2026A%26A...705A.243C/abstract">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202557666">DOI</a></p></li>
+        <li><p class="ref-title">Radial velocity detection of the TRAPPIST-1 planetary system with SPIRou and NIRPS</p><p class="ref-meta">L’Heureux, A.; Doyon, R.; Cadieux, C. et al. (2026), <i>Astronomy &amp; Astrophysics 714, A359</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202659920%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202659920">DOI</a></p></li>
+        <li><p class="ref-title">Characterising planetary systems with SPIRou: Questions about the magnetic cycle of 55 Cnc A and two new planets around B</p><p class="ref-meta">Moutou, C.; Petit, P.; Charpentier, P. et al. (2026), <i>Astronomy &amp; Astrophysics 705, A190</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202556146%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202556146">DOI</a></p></li>
+        <li><p class="ref-title">The SPIRou Legacy Survey</p><p class="ref-meta">Ould-Elhkim, M.; Moutou, C.; Donati, J.F. et al. (2026), <i>Astronomy &amp; Astrophysics 705, A234</i> · <a href="https://ui.adsabs.harvard.edu/abs/2026A%26A...705A.234O/abstract">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202555469">DOI</a></p></li>
+        <li><p class="ref-title">Characterizing planetary systems with SPIRou: Detection of a sub-Neptune in a 6-day period orbit around the M dwarf Gl 410</p><p class="ref-meta">Carmona, A.; Delfosse, X.; Ould-Elhkim, M. et al. (2025), <i>Astronomy &amp; Astrophysics 700, A222</i> · <a href="https://ui.adsabs.harvard.edu/abs/2025A%26A...700A.222C/abstract">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202452513">DOI</a></p></li>
+        <li><p class="ref-title">GI 725A b: A potential super-Earth detected with SOPHIE and SPIRou in an M dwarf binary system at 3.5 pc</p><p class="ref-meta">Cortés-Zuleta, P.; Boisse, I.; Ould-Elhkim, M. et al. (2025), <i>Astronomy &amp; Astrophysics 693, A164</i> · <a href="https://ui.adsabs.harvard.edu/abs/2025A%26A...693A.164C/abstract">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202451646">DOI</a></p></li>
+        <li><p class="ref-title">Chemical Fingerprints of M Dwarfs: High-resolution Spectroscopy on 31 M Dwarfs with SPIRou</p><p class="ref-meta">Jahandar, F.; Doyon, R.; Artigau, É. et al. (2025), <i>The Astrophysical Journal 978, 154</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.3847/1538-4357/ad91a0%22">ADS</a> · <a href="https://doi.org/10.3847/1538-4357/ad91a0">DOI</a></p></li>
+        <li><p class="ref-title">Chromaticity of stellar activity in radial velocities</p><p class="ref-meta">Larue, P.; Delfosse, X.; Carmona, A. et al. (2025), <i>Astronomy &amp; Astrophysics 701, A216</i> · <a href="https://ui.adsabs.harvard.edu/abs/2025A%26A...701A.216L/abstract">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202554963">DOI</a></p></li>
+        <li><p class="ref-title">The SPIRou Legacy Survey</p><p class="ref-meta">Ould-Elhkim, M.; Moutou, C.; Donati, J.F. et al. (2025), <i>Astronomy &amp; Astrophysics 696, A152</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202347814%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202347814">DOI</a></p></li>
+        <li><p class="ref-title">Comprehensive High-resolution Chemical Spectroscopy of Barnard’s Star with SPIRou</p><p class="ref-meta">Jahandar, F.; Doyon, R.; Artigau, É. et al. (2024), <i>The Astrophysical Journal 966, 56</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.3847/1538-4357/ad3063%22">ADS</a> · <a href="https://doi.org/10.3847/1538-4357/ad3063">DOI</a></p></li>
+        <li><p class="ref-title">Characterising planetary systems with SPIRou: Temperate sub-Neptune exoplanet orbiting the nearby fully convective star GJ 1289 and a candidate around GJ 3378</p><p class="ref-meta">Moutou, C.; Ould-Elhkim, M.; Donati, J.F. et al. (2024), <i>Astronomy &amp; Astrophysics 688, A196</i> · <a href="https://ui.adsabs.harvard.edu/abs/2024A%26A...688A.196M/abstract">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202450466">DOI</a></p></li>
+        <li><p class="ref-title">Exoplanet science with SPIRou: near-infrared precision velocimetry and spectropolarimetry</p><p class="ref-meta">Moutou, C.; Donati, J.F.; Debras, F. (2024), <i>Comptes Rendus. Physique 24, 37</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.5802/crphys.141%22">ADS</a> · <a href="https://doi.org/10.5802/crphys.141">DOI</a></p></li>
+        <li><p class="ref-title">Near-IR and optical radial velocities of the active M dwarf star Gl 388 (AD Leo) with SPIRou at CFHT and SOPHIE at OHP</p><p class="ref-meta">Carmona, A.; Delfosse, X.; Bellotti, S. et al. (2023), <i>Astronomy &amp; Astrophysics 674, A110</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202245660%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202245660">DOI</a></p></li>
+        <li><p class="ref-title">Optical and near-infrared stellar activity characterization of the early M dwarf Gl 205 with SOPHIE and SPIRou</p><p class="ref-meta">Cortés-Zuleta, P.; Boisse, I.; Klein, B. et al. (2023), <i>Astronomy &amp; Astrophysics 673, A14</i> · <a href="https://ui.adsabs.harvard.edu/abs/2023A%26A...673A..14C/abstract">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202245131">DOI</a></p></li>
+        <li><p class="ref-title">The SPIRou legacy survey</p><p class="ref-meta">Fouqué, P.; Martioli, E.; Donati, J.F. et al. (2023), <i>Astronomy &amp; Astrophysics 672, A52</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202345839%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202345839">DOI</a></p></li>
+        <li><p class="ref-title">Characterizing planetary systems with SPIRou: M-dwarf planet-search survey and the multiplanet systems GJ 876 and GJ 1148</p><p class="ref-meta">Moutou, C.; Delfosse, X.; Petit, A.C. et al. (2023), <i>Astronomy &amp; Astrophysics 678, A207</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202346813%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202346813">DOI</a></p></li>
+        <li><p class="ref-title">Wapiti: A data-driven approach to correct for systematics in RV data</p><p class="ref-meta">Ould-Elhkim, M.; Moutou, C.; Donati, J.F. et al. (2023), <i>Astronomy &amp; Astrophysics 675, A187</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202346472%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202346472">DOI</a></p></li>
+        <li><p class="ref-title">Estimating the atmospheric properties of 44 M dwarfs from SPIRou spectra</p><p class="ref-meta">Cristofari, P.I.; Donati, J.F.; Masseron, T. et al. (2022), <i>Monthly Notices of the Royal Astronomical Society 516, 3802</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stac2364%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stac2364">DOI</a></p></li>
+        <li><p class="ref-title">Estimating fundamental parameters of nearby M dwarfs from SPIRou spectra</p><p class="ref-meta">Cristofari, P.I.; Donati, J.F.; Masseron, T. et al. (2022), <i>Monthly Notices of the Royal Astronomical Society 511, 1893</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stab3679%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stab3679">DOI</a></p></li>
+        <li><p class="ref-title">TOI-1278 B: SPIRou Unveils a Rare Brown Dwarf Companion in Close-in Orbit around an M Dwarf</p><p class="ref-meta">Artigau, É.; Hébrard, G.; Cadieux, C. et al. (2021), <i>The Astronomical Journal 162, 144</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.3847/1538-3881/ac096d%22">ADS</a> · <a href="https://doi.org/10.3847/1538-3881/ac096d">DOI</a></p></li>
+      </ol>
+    </section>
+    <section class="group" id="wp2">
+      <h3>WP2: Planetary interiors</h3>
+      <ol class="refs">
+        <li><p class="ref-title">Revisiting TOI-4438 and TOI-442 planetary systems with new observations from SPIRou and TESS</p><p class="ref-meta">Serrano Bell, J.; Hébrard, G.; Martioli, E. et al. (2026), <i>Astronomy &amp; Astrophysics 713, A166</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202659984%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202659984">DOI</a></p></li>
+        <li><p class="ref-title">TOI-4860 b, a short-period giant planet transiting an M3.5 dwarf</p><p class="ref-meta">Almenara, J.M.; Bonfils, X.; Bryant, E.M. et al. (2024), <i>Astronomy &amp; Astrophysics 683, A166</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202346999%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202346999">DOI</a></p></li>
+        <li><p class="ref-title">A sub-Neptune planet around TOI-1695 discovered and characterized with SPIRou and TESS</p><p class="ref-meta">Kiefer, F.; Hébrard, G.; Martioli, E. et al. (2023), <i>Astronomy &amp; Astrophysics 670, A136</i> · <a href="https://ui.adsabs.harvard.edu/abs/2023A%26A...670A.136K/abstract">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202245129">DOI</a></p></li>
+        <li><p class="ref-title">TOI-1452 b: SPIRou and TESS Reveal a Super-Earth in a Temperate Orbit Transiting an M4 Dwarf</p><p class="ref-meta">Cadieux, C.; Doyon, R.; Plotnykov, M. et al. (2022), <i>The Astronomical Journal 164, 96</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.3847/1538-3881/ac7cea%22">ADS</a> · <a href="https://doi.org/10.3847/1538-3881/ac7cea">DOI</a></p></li>
+        <li><p class="ref-title">TESS discovery of a sub-Neptune orbiting a mid-M dwarf TOI-2136</p><p class="ref-meta">Gan, T.; Soubkiou, A.; Wang, S.X. et al. (2022), <i>Monthly Notices of the Royal Astronomical Society 514, 4120</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stac1448%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stac1448">DOI</a></p></li>
+        <li><p class="ref-title">TOI-530b: a giant planet transiting an M-dwarf detected by TESS</p><p class="ref-meta">Gan, T.; Lin, Z.; Wang, S.X. et al. (2022), <i>Monthly Notices of the Royal Astronomical Society 511, 83</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stab3708%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stab3708">DOI</a></p></li>
+        <li><p class="ref-title">TOI-1759 b: A transiting sub-Neptune around a low mass star characterized with SPIRou and TESS</p><p class="ref-meta">Martioli, E.; Hébrard, G.; Fouqué, P. et al. (2022), <i>Astronomy &amp; Astrophysics 660, A86</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202142540%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202142540">DOI</a></p></li>
+      </ol>
+    </section>
+    <section class="group" id="wp3">
+      <h3>WP3: Young magnetic stars and planet formation</h3>
+      <ol class="refs">
+        <li><p class="ref-title">Monitoring the magnetospheric accretion of the classical T Tauri star DO Tau with SPIRou</p><p class="ref-meta">Donati, J.F.; Cristofari, P.I.; Carmona, A. et al. (2026), <i>Astronomy &amp; Astrophysics 708, A230</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202558694%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202558694">DOI</a></p></li>
+        <li><p class="ref-title">Unstable magnetospheric accretion on the T Tauri star TW Hya</p><p class="ref-meta">Donati, J.F.; Cristofari, P.I.; Moutou, C. et al. (2026), <i>Astronomy &amp; Astrophysics 713, A243</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202661267%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202661267">DOI</a></p></li>
+        <li><p class="ref-title">Magnetic field measurements in a sample of Class I and flat-spectrum protostars observed with SPIRou</p><p class="ref-meta">Drouglazet, L.; Alecian, E.; Sousa, A. et al. (2026), <i>Astronomy &amp; Astrophysics 708, A371</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202558258%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202558258">DOI</a></p></li>
+        <li><p class="ref-title">The circumstellar environment of the young, low-mass dipper star JH 223</p><p class="ref-meta">Freitas, T.P.; Bouvier, J.; Zaire, B. et al. (2026), <i>Astronomy &amp; Astrophysics 709, A243</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202558514%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202558514">DOI</a></p></li>
+        <li><p class="ref-title">Characterising the magnetospheric accretion process of DF Tauri’s primary</p><p class="ref-meta">Pouilly, K.; Audard, M. (2026), <i>Astronomy &amp; Astrophysics 708, A45</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202557160%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202557160">DOI</a></p></li>
+        <li><p class="ref-title">Six-yr SPIRou monitoring of the young planet-host dwarf AU Mic</p><p class="ref-meta">Donati, J.-.; Cristofari, P.I.; Moutou, C. et al. (2025), <i>arXiv preprint</i> · <a href="https://ui.adsabs.harvard.edu/search/q=identifier%3A%22arXiv%3A2507.01746%22">ADS</a> · <a href="https://arxiv.org/abs/2507.01746">arXiv</a></p></li>
+        <li><p class="ref-title">Searching for close-in planets around TWA 7 with SPIRou</p><p class="ref-meta">Donati, J.F.; Cristofari, P.I.; Moutou, C. et al. (2025), <i>Astronomy &amp; Astrophysics 704, A307</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202557322%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202557322">DOI</a></p></li>
+        <li><p class="ref-title">Mass, gas, and Gauss around a T Tauri Star with SPIRou</p><p class="ref-meta">Donati, J.F.; Gaidos, E.; Moutou, C. et al. (2025), <i>Astronomy &amp; Astrophysics 698, L14</i> · <a href="https://ui.adsabs.harvard.edu/abs/2025A%26A...698L..14D/abstract">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202554628">DOI</a></p></li>
+        <li><p class="ref-title">The enigmatic magnetic field of the planet hosting Herbig Ae/Be star HD 169142</p><p class="ref-meta">Hubrig, S.; Järvinen, S.P.; Ilyin, I. et al. (2025), <i>Astronomy &amp; Astrophysics 696, L15</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202453225%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202453225">DOI</a></p></li>
+        <li><p class="ref-title">SPIRou spectropolarimetry of the T Tauri star TW Hydrae: magnetic fields, accretion, and planets</p><p class="ref-meta">Donati, J.F.; Cristofari, P.I.; Lehmann, L.T. et al. (2024), <i>Monthly Notices of the Royal Astronomical Society 531, 3256</i> · <a href="https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.3256D/abstract">ADS</a> · <a href="https://doi.org/10.1093/mnras/stae1227">DOI</a></p></li>
+        <li><p class="ref-title">The classical T Tauri star CI Tau observed with SPIRou: magnetospheric accretion and planetary formation</p><p class="ref-meta">Donati, J.F.; Finociety, B.; Cristofari, P.I. et al. (2024), <i>Monthly Notices of the Royal Astronomical Society 530, 264</i> · <a href="https://ui.adsabs.harvard.edu/abs/2024MNRAS.530..264D/abstract">ADS</a> · <a href="https://doi.org/10.1093/mnras/stae675">DOI</a></p></li>
+        <li><p class="ref-title">SPIRou monitoring of the protostar V347 Aur: binarity, magnetic fields, pulsed dynamo, and accretion</p><p class="ref-meta">Donati, J.F.; Cristofari, P.I.; Carmona, A. et al. (2024), <i>Monthly Notices of the Royal Astronomical Society 534, 231</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stae2076%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stae2076">DOI</a></p></li>
+        <li><p class="ref-title">SPIRou observations of the young planet-hosting star PDS 70</p><p class="ref-meta">Donati, J.F.; Cristofari, P.I.; Alencar, S.H.P. et al. (2024), <i>Monthly Notices of the Royal Astronomical Society 535, 3363</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stae2506%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stae2506">DOI</a></p></li>
+        <li><p class="ref-title">Long-period modulation of the classical T Tauri star CI Tau</p><p class="ref-meta">Manick, R.; Sousa, A.P.; Bouvier, J. et al. (2024), <i>Astronomy &amp; Astrophysics 686, A249</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202348258%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202348258">DOI</a></p></li>
+        <li><p class="ref-title">Magnetic field, magnetospheric accretion, and candidate planet of the young star GM Aurigae observed with SPIRou</p><p class="ref-meta">Zaire, B.; Donati, J.F.; Alencar, S.P. et al. (2024), <i>Monthly Notices of the Royal Astronomical Society 533, 2893</i> · <a href="https://ui.adsabs.harvard.edu/abs/2024MNRAS.533.2893Z/abstract">ADS</a> · <a href="https://doi.org/10.1093/mnras/stae1955">DOI</a></p></li>
+        <li><p class="ref-title">The magnetic field and multiple planets of the young dwarf AU Mic</p><p class="ref-meta">Donati, J.F.; Cristofari, P.I.; Finociety, B. et al. (2023), <i>Monthly Notices of the Royal Astronomical Society 525, 455</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stad1193%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stad1193">DOI</a></p></li>
+        <li><p class="ref-title">Monitoring the young planet host V1298 Tau with SPIRou: planetary system and evolving large-scale magnetic field</p><p class="ref-meta">Finociety, B.; Donati, J.F.; Cristofari, P.I. et al. (2023), <i>Monthly Notices of the Royal Astronomical Society 526, 4627</i> · <a href="https://ui.adsabs.harvard.edu/abs/2023MNRAS.526.4627F/abstract">ADS</a> · <a href="https://doi.org/10.1093/mnras/stad3012">DOI</a></p></li>
+        <li><p class="ref-title">The active weak-line T Tauri star LkCa 4 observed with SPIRou and TESS</p><p class="ref-meta">Finociety, B.; Donati, J.F.; Grankin, K. et al. (2023), <i>Monthly Notices of the Royal Astronomical Society 520, 3049</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stad267%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stad267">DOI</a></p></li>
+        <li><p class="ref-title">Star-disk interactions in the strongly accreting T Tauri star S CrA N</p><p class="ref-meta">Nowacki, H.; Alecian, E.; Perraut, K. et al. (2023), <i>Astronomy &amp; Astrophysics 678, A86</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202347145%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202347145">DOI</a></p></li>
+        <li><p class="ref-title">New insights on the near-infrared veiling of young stars using CFHT/SPIRou data</p><p class="ref-meta">Sousa, A.P.; Bouvier, J.; Alencar, S.H.P. et al. (2023), <i>Astronomy &amp; Astrophysics 670, A142</i> · <a href="https://ui.adsabs.harvard.edu/abs/2023A%26A...670A.142S/abstract">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202244720">DOI</a></p></li>
+        <li><p class="ref-title">Magnetic topologies of two weak-line T Tauri stars TAP 4 and TAP 40</p><p class="ref-meta">Xiang, Y.; Gu, S.; Donati, J.F. et al. (2023), <i>Monthly Notices of the Royal Astronomical Society 520, 3964</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stad363%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stad363">DOI</a></p></li>
+        <li><p class="ref-title">Small-scale magnetic fields of the spectroscopic binary T Tauri stars V1878 Ori and V4046 Sgr</p><p class="ref-meta">Hahlin, A.; Kochukhov, O. (2022), <i>Astronomy &amp; Astrophysics 659, A151</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202142425%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202142425">DOI</a></p></li>
+        <li><p class="ref-title">Accretion process, magnetic fields, and apsidal motion in the pre-main sequence binary DQ Tau</p><p class="ref-meta">Pouilly, K.; Kochukhov, O.; Kóspál, Á. et al. (2022), <i>Monthly Notices of the Royal Astronomical Society 518, 5072</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stac3322%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stac3322">DOI</a></p></li>
+        <li><p class="ref-title">Diving Beneath the Sea of Stellar Activity: Chromatic Radial Velocities of the Young AU Mic Planetary System</p><p class="ref-meta">Cale, B.L.; Reefe, M.; Plavchan, P. et al. (2021), <i>The Astronomical Journal 162, 295</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.3847/1538-3881/ac2c80%22">ADS</a> · <a href="https://doi.org/10.3847/1538-3881/ac2c80">DOI</a></p></li>
+        <li><p class="ref-title">The T Tauri star V410 Tau in the eyes of SPIRou and TESS</p><p class="ref-meta">Finociety, B.; Donati, J.F.; Klein, B. et al. (2021), <i>Monthly Notices of the Royal Astronomical Society 508, 3427</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stab2778%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stab2778">DOI</a></p></li>
+        <li><p class="ref-title">Star-disk interaction in the T Tauri star V2129 Ophiuchi: An evolving accretion-ejection structure</p><p class="ref-meta">Sousa, A.P.; Bouvier, J.; Alencar, S.H.P. et al. (2021), <i>Astronomy &amp; Astrophysics 649, A68</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202140346%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202140346">DOI</a></p></li>
+      </ol>
+    </section>
+    <section class="group" id="wp4">
+      <h3>WP4: Exoplanet atmospheres</h3>
+      <ol class="refs">
+        <li><p class="ref-title">SPIRou near-infrared spectropolarimetry of the ultra-hot Jupiter KELT-9b: tentative detection of the planet magnetic field</p><p class="ref-meta">Lavail, A.; Debras, F.; Royo, D.R. et al. (2026), <i>arXiv preprint</i> · <a href="https://ui.adsabs.harvard.edu/search/q=identifier%3A%22arXiv%3A2610.05951%22">ADS</a> · <a href="https://arxiv.org/abs/2610.05951">arXiv</a></p></li>
+        <li><p class="ref-title">Searching for molecular signatures in 14 transiting exoplanets with SPIRou</p><p class="ref-meta">Masson, A.; Vinatier, S.; Bézard, B. et al. (2026), <i>Astronomy &amp; Astrophysics 714, A261</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202659933%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202659933">DOI</a></p></li>
+        <li><p class="ref-title">Detection of OH and Fe in the dayside atmosphere of the hottest ultra-hot Jupiter KELT-9b with SPIRou</p><p class="ref-meta">Yang, Y.; Chen, G.; Zhang, H. et al. (2025), <i>Astronomy &amp; Astrophysics 703, A39</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202555347%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202555347">DOI</a></p></li>
+        <li><p class="ref-title">Probing atmospheric escape through metastable He I triplet lines in 15 exoplanets observed with SPIRou</p><p class="ref-meta">Masson, A.; Vinatier, S.; Bézard, B. et al. (2024), <i>Astronomy &amp; Astrophysics 688, A179</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202449608%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202449608">DOI</a></p></li>
+        <li><p class="ref-title">Homogeneous search for helium in the atmosphere of 11 gas giant exoplanets with SPIRou</p><p class="ref-meta">Allart, R.; Lemée-Joliecoeur, P.B.; Jaziri, A.Y. et al. (2023), <i>Astronomy &amp; Astrophysics 677, A164</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202245832%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202245832">DOI</a></p></li>
+        <li><p class="ref-title">CO or no CO? Narrowing the CO abundance constraint and recovering the H2O detection in the atmosphere of WASP-127 b using SPIRou</p><p class="ref-meta">Boucher, A.; Lafreniére, D.; Pelletier, S. et al. (2023), <i>Monthly Notices of the Royal Astronomical Society 522, 5062</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stad1247%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stad1247">DOI</a></p></li>
+        <li><p class="ref-title">ATMOSPHERIX: II- Characterizing exoplanet atmospheres through transmission spectroscopy with SPIRou</p><p class="ref-meta">Debras, F.; Klein, B.; Donati, J.F. et al. (2023), <i>Monthly Notices of the Royal Astronomical Society 527, 566</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stad2608%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stad2608">DOI</a></p></li>
+        <li><p class="ref-title">ATMOSPHERIX: I- an open source high-resolution transmission spectroscopy pipeline for exoplanets atmospheres with SPIRou</p><p class="ref-meta">Klein, B.; Debras, F.; Donati, J.F. et al. (2023), <i>Monthly Notices of the Royal Astronomical Society 527, 544</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stad2607%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stad2607">DOI</a></p></li>
+        <li><p class="ref-title">Characterizing Exoplanetary Atmospheres at High Resolution with SPIRou: Detection of Water on HD 189733 b</p><p class="ref-meta">Boucher, A.; Darveau-Bernier, A.; Pelletier, S. et al. (2021), <i>The Astronomical Journal 162, 233</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.3847/1538-3881/ac1f8e%22">ADS</a> · <a href="https://doi.org/10.3847/1538-3881/ac1f8e">DOI</a></p></li>
+        <li><p class="ref-title">Where Is the Water? Jupiter-like C/H Ratio but Strong H 2 O Depletion Found on τ Boötis b Using SPIRou</p><p class="ref-meta">Pelletier, S.; Benneke, B.; Darveau-Bernier, A. et al. (2021), <i>The Astronomical Journal 162, 73</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.3847/1538-3881/ac0428%22">ADS</a> · <a href="https://doi.org/10.3847/1538-3881/ac0428">DOI</a></p></li>
+      </ol>
+    </section>
+    <section class="group" id="wp5">
+      <h3>WP5: Stellar magnetism across the HR diagram</h3>
+      <ol class="refs">
+        <li><p class="ref-title">The Rotational and Magnetic Properties of Polaris from Long-term Spectropolarimetric Monitoring</p><p class="ref-meta">Barron, J.A.; Wade, G.A.; Folsom, C.P. (2026), <i>The Astrophysical Journal 1005, 112</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.3847/1538-4357/ae77f9%22">ADS</a> · <a href="https://doi.org/10.3847/1538-4357/ae77f9">DOI</a></p></li>
+        <li><p class="ref-title">Spectropolarimetric Constraints on the Maunder Minimum Analog HD 166620: Evidence for Weakened Magnetic Braking</p><p class="ref-meta">Chiti, F.; van Saders, J.L.; Kochukhov, O. et al. (2026), <i>The Astrophysical Journal 1000, 175</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.3847/1538-4357/ae4d3b%22">ADS</a> · <a href="https://doi.org/10.3847/1538-4357/ae4d3b">DOI</a></p></li>
+        <li><p class="ref-title">Activity correlation and temporal variation of small-scale magnetic fields on young Sun-like stars</p><p class="ref-meta">Hahlin, A.; Zaire, B.; Folsom, C.P. et al. (2026), <i>Astronomy &amp; Astrophysics 706, A138</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202556874%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202556874">DOI</a></p></li>
+        <li><p class="ref-title">Probabilistic Zeeman-Doppler imaging of stellar magnetic fields</p><p class="ref-meta">Andersson, J.R.; Kochukhov, O.; Zhao, Z. et al. (2025), <i>Astronomy &amp; Astrophysics 699, A63</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202452299%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202452299">DOI</a></p></li>
+        <li><p class="ref-title">A Magnetic Field Detection in the Massive O-type Bright Giant 63 Oph</p><p class="ref-meta">Barron, J.A.; Wade, G.A.; Holgado, G. et al. (2025), <i>The Astrophysical Journal 991, 79</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.3847/1538-4357/adf6d9%22">ADS</a> · <a href="https://doi.org/10.3847/1538-4357/adf6d9">DOI</a></p></li>
+        <li><p class="ref-title">A BCool survey of stellar magnetic cycles</p><p class="ref-meta">Bellotti, S.; Petit, P.; Jeffers, S.V. et al. (2025), <i>Astronomy &amp; Astrophysics 693, A269</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202452378%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202452378">DOI</a></p></li>
+        <li><p class="ref-title">Rotational modulation and long-term evolution of the small-scale magnetic fields of M dwarfs observed with SPIRou</p><p class="ref-meta">Cristofari, P.I.; Donati, J.F.; Bellotti, S. et al. (2025), <i>Astronomy &amp; Astrophysics 702, A111</i> · <a href="https://ui.adsabs.harvard.edu/abs/2025A%26A...702A.111C/abstract">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202554902">DOI</a></p></li>
+        <li><p class="ref-title">Full Stokes magnetometry of the active M dwarfs AU Mic and EV Lac with SPIRou</p><p class="ref-meta">Donati, J.F.; Cristofari, P.I.; Klein, B. et al. (2025), <i>Astronomy &amp; Astrophysics 700, A122</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202555428%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202555428">DOI</a></p></li>
+        <li><p class="ref-title">Comparative study of small-scale magnetic fields on ξ Boo A using optical and near-infrared spectroscopy</p><p class="ref-meta">Hahlin, A.; Kochukhov, O.; Chaturvedi, P. et al. (2025), <i>Astronomy &amp; Astrophysics 696, A4</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202453016%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202453016">DOI</a></p></li>
+        <li><p class="ref-title">Magnetic Field Monitoring of Four Massive A-F Supergiants*</p><p class="ref-meta">Wade, G.A.; Oksala, M.; Neiner, C. et al. (2025), <i>The Astrophysical Journal Letters 988, L38</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.3847/2041-8213/ade9ac%22">ADS</a> · <a href="https://doi.org/10.3847/2041-8213/ade9ac">DOI</a></p></li>
+        <li><p class="ref-title">Long-term monitoring of large-scale magnetic fields across optical and near-infrared domains with ESPaDOnS, Narval, and SPIRou</p><p class="ref-meta">Bellotti, S.; Morin, J.; Lehmann, L.T. et al. (2024), <i>Astronomy &amp; Astrophysics 686, A66</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202348043%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202348043">DOI</a></p></li>
+        <li><p class="ref-title">Spectropolarimetric characterisation of exoplanet host stars in preparation of the Ariel mission</p><p class="ref-meta">Bellotti, S.; Evensberget, D.; Vidotto, A.A. et al. (2024), <i>Astronomy &amp; Astrophysics 688, A63</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202449581%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202449581">DOI</a></p></li>
+        <li><p class="ref-title">Multi-scale magnetic field investigation of the M-dwarf eclipsing binary CU Cancri</p><p class="ref-meta">Hahlin, A.; Kochukhov, O.; Rains, A.D. et al. (2024), <i>Astronomy &amp; Astrophysics 684, A175</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202348750%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202348750">DOI</a></p></li>
+        <li><p class="ref-title">The large-scale magnetic field of the M dwarf double-line spectroscopic binary FK Aqr</p><p class="ref-meta">Tsvetkova, S.; Morin, J.; Folsom, C.P. et al. (2024), <i>Astronomy &amp; Astrophysics 682, A77</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202347604%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202347604">DOI</a></p></li>
+        <li><p class="ref-title">Monitoring the large-scale magnetic field of AD Leo with SPIRou, ESPaDOnS, and Narval</p><p class="ref-meta">Bellotti, S.; Morin, J.; Lehmann, L.T. et al. (2023), <i>Astronomy &amp; Astrophysics 676, A56</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202346845%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202346845">DOI</a></p></li>
+        <li><p class="ref-title">Measuring small-scale magnetic fields of 44 M dwarfs from SPIRou spectra with ZeeTurbo</p><p class="ref-meta">Cristofari, P.I.; Donati, J.F.; Moutou, C. et al. (2023), <i>Monthly Notices of the Royal Astronomical Society 526, 5648</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stad3144%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stad3144">DOI</a></p></li>
+        <li><p class="ref-title">Constraining atmospheric parameters and surface magnetic fields with ZeeTurbo: an application to SPIRou spectra</p><p class="ref-meta">Cristofari, P.I.; Donati, J.F.; Folsom, C.P. et al. (2023), <i>Monthly Notices of the Royal Astronomical Society 522, 1342</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stad865%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stad865">DOI</a></p></li>
+        <li><p class="ref-title">Magnetic fields and rotation periods of M dwarfs from SPIRou spectra</p><p class="ref-meta">Donati, J.F.; Lehmann, L.T.; Cristofari, P.I. et al. (2023), <i>Monthly Notices of the Royal Astronomical Society 525, 2015</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stad2301%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stad2301">DOI</a></p></li>
+        <li><p class="ref-title">SPIRou reveals unusually strong magnetic fields of slowly rotating M dwarfs</p><p class="ref-meta">Lehmann, L.T.; Donati, J.F.; Fouqué, P. et al. (2023), <i>Monthly Notices of the Royal Astronomical Society 527, 4330</i> · <a href="https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.4330L/abstract">ADS</a> · <a href="https://doi.org/10.1093/mnras/stad3472">DOI</a></p></li>
+        <li><p class="ref-title">Finding magnetic north: an extraordinary magnetic field detection in Polaris and first results of a magnetic survey of classical Cepheids</p><p class="ref-meta">Barron, J.A.; Wade, G.A.; Evans, N.R. et al. (2022), <i>Monthly Notices of the Royal Astronomical Society 512, 4021</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stac565%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stac565">DOI</a></p></li>
+        <li><p class="ref-title">First results of a magnetic survey of classical Cepheids</p><p class="ref-meta">Barron, J.A.; Wade, G.A.; Folsom, C.P. et al. (2022), <i>Proceedings of the International Astronomical Union 18, 233</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1017/s1743921322002174%22">ADS</a> · <a href="https://doi.org/10.1017/s1743921322002174">DOI</a></p></li>
+        <li><p class="ref-title">Mitigating stellar activity jitter with different line lists for least-squares deconvolution</p><p class="ref-meta">Bellotti, S.; Petit, P.; Morin, J. et al. (2022), <i>Astronomy &amp; Astrophysics 657, A107</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202141812%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202141812">DOI</a></p></li>
+        <li><p class="ref-title">Short-term variations of surface magnetism and prominences of the young Sun-like star V530 Per</p><p class="ref-meta">Cang, T.Q.; Petit, P.; Donati, J.F. et al. (2021), <i>Astronomy &amp; Astrophysics 654, A42</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202141975%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202141975">DOI</a></p></li>
+        <li><p class="ref-title">Magnetic field of the eclipsing binary UV Piscium</p><p class="ref-meta">Hahlin, A.; Kochukhov, O.; Alecian, E. et al. (2021), <i>Astronomy &amp; Astrophysics 650, A197</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202140832%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202140832">DOI</a></p></li>
+        <li><p class="ref-title">Multi-instrumental view of magnetic fields and activity of ϵ Eridani with SPIRou, NARVAL, and TESS</p><p class="ref-meta">Petit, P.; Folsom, C.P.; Donati, J.F. et al. (2021), <i>Astronomy &amp; Astrophysics 648, A55</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202040027%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202040027">DOI</a></p></li>
+        <li><p class="ref-title">Toward the global magnetic field of the planet‐hosting red giant eps Tau</p><p class="ref-meta">Plachinda, S.I.; Butkovskaya, V.V.; Pankov, N.F. (2021), <i>Astronomische Nachrichten 342, 607</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1002/asna.202113858%22">ADS</a> · <a href="https://doi.org/10.1002/asna.202113858">DOI</a></p></li>
+        <li><p class="ref-title">Magnetic field and activity phenomena of the K2 dwarf V471 Tau</p><p class="ref-meta">Zaire, B.; Donati, J.F.; Klein, B. (2021), <i>Monthly Notices of the Royal Astronomical Society 504, 1969</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1093/mnras/stab1019%22">ADS</a> · <a href="https://doi.org/10.1093/mnras/stab1019">DOI</a></p></li>
+      </ol>
+    </section>
+    <section class="group" id="methods">
+      <h3>Instruments, pipelines and methods</h3>
+      <ol class="refs">
+        <li><p class="ref-title">The Interpolation Constraint in the RV Analysis of M Dwarfs Using Empirical Templates</p><p class="ref-meta">Doshi, D.; Cowan, N.B.; Artigau, É. et al. (2025), <i>The Astronomical Journal 170, 269</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.3847/1538-3881/ae08b0%22">ADS</a> · <a href="https://doi.org/10.3847/1538-3881/ae08b0">DOI</a></p></li>
+        <li><p class="ref-title">Measuring Sub-Kelvin Variations in Stellar Temperature with High-resolution Spectroscopy</p><p class="ref-meta">Artigau, É.; Cadieux, C.; Cook, N.J. et al. (2024), <i>The Astronomical Journal 168, 252</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.3847/1538-3881/ad7b30%22">ADS</a> · <a href="https://doi.org/10.3847/1538-3881/ad7b30">DOI</a></p></li>
+        <li><p class="ref-title">Line-by-line Velocity Measurements: an Outlier-resistant Method for Precision Velocimetry</p><p class="ref-meta">Artigau, É.; Cadieux, C.; Cook, N.J. et al. (2022), <i>The Astronomical Journal 164, 84</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.3847/1538-3881/ac7ce6%22">ADS</a> · <a href="https://doi.org/10.3847/1538-3881/ac7ce6">DOI</a></p></li>
+        <li><p class="ref-title">APERO: A PipelinE to Reduce Observations - Demonstration with SPIRou</p><p class="ref-meta">Cook, N.J.; Artigau, É.; Doyon, R. et al. (2022), <i>Publications of the Astronomical Society of the Pacific 134, 114509</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1088/1538-3873/ac9e74%22">ADS</a> · <a href="https://doi.org/10.1088/1538-3873/ac9e74">DOI</a></p></li>
+        <li><p class="ref-title">The SPIRou wavelength calibration for precise radial velocities in the near infrared</p><p class="ref-meta">Hobson, M.J.; Bouchy, F.; Cook, N.J. et al. (2021), <i>Astronomy &amp; Astrophysics 648, A48</i> · <a href="https://ui.adsabs.harvard.edu/search/q=doi%3A%2210.1051/0004-6361/202038413%22">ADS</a> · <a href="https://doi.org/10.1051/0004-6361/202038413">DOI</a></p></li>
+      </ol>
+    </section>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><a href="./">ʻAmakihi</a> · a Wenaokeao community survey at the <a href="https://www.cfht.hawaii.edu/">Canada-France-Hawaii Telescope</a>, Maunakea, Hawaiʻi.</p>
+  </div>
+</footer>
+
+</body>
+</html>

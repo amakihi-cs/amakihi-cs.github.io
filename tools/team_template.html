@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ʻAmakihi team pages</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230d1726'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23cfdc4f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbfaf6;
+    --surface: #ffffff;
+    --ink: #18202b;
+    --muted: #5a6370;
+    --line: #e3e1d8;
+    --accent: #5d6e0f;
+    --accent-soft: #eef2d3;
+    --code-bg: #f3f1ea;
+    --hero-bg: #0d1726;
+    --hero-bg-2: #15263d;
+    --hero-ink: #eef1e6;
+    --hero-muted: #a9b3bf;
+    --hero-accent: #cfdc4f;
+    --radius: 14px;
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1620;
+      --surface: #151e2a;
+      --ink: #e7eae3;
+      --muted: #9ea8b3;
+      --line: #253140;
+      --accent: #c9d65a;
+      --accent-soft: #222d1d;
+      --code-bg: #1b2533;
+      --hero-bg: #0a111c;
+      --hero-bg-2: #111d2f;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 400 1rem/1.65 var(--sans); -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-underline-offset: 0.18em; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 720px) { .wrap { padding: 0 32px; } }
+
+  /* Header */
+  .hero { color: var(--hero-ink); background: linear-gradient(180deg, var(--hero-bg), var(--hero-bg-2)); }
+  .topbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; padding: 18px 0; }
+  .brand { display: flex; align-items: center; gap: 12px; font: 600 1.25rem/1 var(--serif); color: var(--hero-ink); text-decoration: none; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px;
+    border: 1px solid rgba(207,220,79,.55); color: var(--hero-accent);
+    font: 600 0.72rem/1.4 var(--sans); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .badge svg { width: 12px; height: 12px; }
+  .nav { display: flex; gap: 20px; flex-wrap: wrap; }
+  .nav a { color: var(--hero-muted); text-decoration: none; font-size: 0.92rem; }
+  .nav a:hover { color: var(--hero-ink); }
+  .hero-body { padding: 28px 0 40px; }
+  .hero h1 { margin: 0; font: 600 clamp(2.2rem, 7vw, 3.4rem)/1.05 var(--serif); }
+  .hero p { margin: 12px 0 0; max-width: 46rem; color: var(--hero-muted); }
+  .hero p b { color: var(--hero-ink); font-weight: 600; }
+
+  /* Layout */
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; padding-top: 36px; padding-bottom: 64px; }
+  .layout > * { min-width: 0; }
+  @media (min-width: 960px) { .layout { grid-template-columns: 240px minmax(0, 1fr); gap: 48px; } }
+  .toc { font-size: 0.92rem; }
+  @media (min-width: 960px) { .toc { position: sticky; top: 20px; align-self: start; max-height: calc(100vh - 40px); overflow-y: auto; } }
+  .toc-title {
+    margin: 0 0 8px; color: var(--muted); font-size: 0.74rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .toc ul { list-style: none; margin: 0 0 22px; padding: 0; }
+  .toc li { margin: 0; }
+  .toc a { display: block; padding: 4px 10px; border-radius: 8px; color: var(--ink); text-decoration: none; }
+  .toc a:hover { background: var(--accent-soft); }
+  .toc li.sub a { padding-left: 24px; }
+  .toc li.missing a { color: var(--muted); }
+  .toc li.missing span { font-size: 0.8em; }
+
+  /* Recent changes */
+  .changes {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 20px 22px; margin-bottom: 28px;
+  }
+  .changes h2 { margin: 0 0 12px; font: 600 1.2rem/1.3 var(--serif); }
+  .changes ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .changes li { display: grid; grid-template-columns: 6.2rem minmax(0, 1fr); gap: 12px; font-size: 0.92rem; overflow-wrap: anywhere; }
+  .changes .when { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .changes .who { font-weight: 600; }
+  .changes .what { color: var(--muted); }
+
+  /* Compiled wiki pages */
+  .page {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 24px 22px; margin-bottom: 28px; scroll-margin-top: 16px;
+  }
+  @media (min-width: 720px) { .page { padding: 32px 36px; } }
+  .page-head { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 18px; }
+  .page-head h2 { margin: 0; font: 600 clamp(1.5rem, 3.5vw, 2rem)/1.2 var(--serif); }
+  .meta { margin: 6px 0 0; color: var(--muted); font-size: 0.86rem; }
+  .meta a { color: var(--muted); }
+  .content h3 { margin: 28px 0 8px; font: 600 1.25rem/1.3 var(--serif); }
+  .content h4, .content h5, .content h6 { margin: 22px 0 6px; font-size: 1.02rem; }
+  .content p, .content ul, .content ol { margin: 0 0 14px; }
+  .content li { margin: 2px 0; }
+  .content blockquote {
+    margin: 0 0 16px; padding: 10px 16px; border-left: 3px solid var(--accent);
+    background: var(--accent-soft); border-radius: 0 10px 10px 0;
+  }
+  .content blockquote p:last-child { margin-bottom: 0; }
+  .content code { font-size: 0.88em; background: var(--code-bg); padding: 1px 5px; border-radius: 5px; }
+  .content :not(pre) > code { overflow-wrap: anywhere; }
+  .content a { overflow-wrap: break-word; }
+  .content pre { background: var(--code-bg); padding: 12px 14px; border-radius: 10px; overflow-x: auto; }
+  .content pre code { background: none; padding: 0; }
+  .table-wrap { overflow-x: auto; margin: 0 0 16px; }
+  .content table { border-collapse: collapse; font-size: 0.92rem; min-width: 100%; }
+  .content th, .content td { border-bottom: 1px solid var(--line); padding: 7px 12px 7px 0; text-align: left; vertical-align: top; }
+  .content th { font-weight: 600; }
+  .content img { max-width: 100%; height: auto; }
+
+  footer { padding: 0 0 48px; color: var(--muted); font-size: 0.86rem; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="#top" id="top">ʻAmakihi
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>Team</span>
+      </a>
+      <nav class="nav" aria-label="Links">
+        <a href="../">Public page</a>
+        <a href="${wiki_url}">Edit in the wiki</a>
+      </nav>
+    </div>
+    <div class="hero-body">
+      <h1>Team pages</h1>
+      <p>A clean reading copy of the private wiki, compiled from wiki commit <b>${commit}</b> (last edit <b>${built}</b>). To add something or reply, edit the wiki: changes appear here a minute or two after saving.</p>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+  <nav class="toc" aria-label="Pages">
+${toc}
+  </nav>
+  <main>
+    <section class="changes" aria-labelledby="recent">
+      <h2 id="recent">Recent changes</h2>
+      <ol>
+${changes}
+      </ol>
+    </section>
+${pages}
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Compiled from <a href="${wiki_url}">the ʻAmakihi wiki</a> by tools/build_team_page.py. Do not forward this page outside the team.</p>
+  </div>
+</footer>
+
+</body>
+</html>
