@@ -1,11 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 3200 2000" width="3200" height="2000">
 <!-- Star field for the ʻAmakihi site headers, made by tools/make_sky.py -->
 <defs>
 <radialGradient id="glow"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
 <linearGradient id="spike-h"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
 <linearGradient id="spike-v" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
 <filter id="soft" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="55"/></filter>
+<clipPath id="patch"><rect width="1600" height="1000"/></clipPath>
 </defs>
+<g id="patch-a" clip-path="url(#patch)">
 <path d="M-100 910 L1700 190" stroke="#a9c4ff" stroke-opacity=".05" stroke-width="170" stroke-linecap="round" fill="none" filter="url(#soft)"/>
 <circle cx="205.9" cy="681.4" r="0.57" fill="#d6e4ff" fill-opacity="0.67"/>
 <circle cx="157.2" cy="614.9" r="0.59" fill="#ffffff" fill-opacity="0.68"/>
@@ -209,4 +211,8 @@
 <g transform="translate(1290 170)"><circle r="7.0" fill="url(#glow)"/><rect x="-26.0" y="-0.45" width="52.0" height="0.9" fill="url(#spike-h)"/><rect x="-0.45" y="-26.0" width="0.9" height="52.0" fill="url(#spike-v)"/><circle r="1.50" fill="#fff"/></g>
 <g transform="translate(215 610)"><circle r="5.6" fill="url(#glow)"/><rect x="-20.8" y="-0.45" width="41.6" height="0.9" fill="url(#spike-h)"/><rect x="-0.45" y="-20.8" width="0.9" height="41.6" fill="url(#spike-v)"/><circle r="1.20" fill="#fff"/></g>
 <g transform="translate(760 880)"><circle r="4.9" fill="url(#glow)"/><rect x="-18.2" y="-0.45" width="36.4" height="0.9" fill="url(#spike-h)"/><rect x="-0.45" y="-18.2" width="0.9" height="36.4" fill="url(#spike-v)"/><circle r="1.05" fill="#fff"/></g>
+</g>
+<use xlink:href="#patch-a" href="#patch-a" transform="matrix(-1 0 0 1 3200 0)"/>
+<use xlink:href="#patch-a" href="#patch-a" transform="matrix(1 0 0 -1 0 2000)"/>
+<use xlink:href="#patch-a" href="#patch-a" transform="matrix(-1 0 0 -1 3200 2000)"/>
 </svg>
