@@ -99,7 +99,7 @@
 
   /* A transiting planet, with its light curve drawn underneath (12 s cycle) */
   .transit { position: absolute; width: 80px; bottom: 6px; right: max(24px, calc((100% - 1080px) / 2 - 84px)); }
-  @media (max-width: 719px) { .transit { width: 54px; bottom: 6px; right: auto; left: 16px; } }
+  @media (max-width: 719px) { .transit { width: 54px; bottom: 6px; right: 100px; } }
   .transit .tr-planet { animation: tr-cross 12s linear infinite; }
   .transit .tr-star { animation: tr-dim 12s linear infinite; }
   .transit .tr-dot { animation: tr-curve 12s linear infinite; }
@@ -115,12 +115,13 @@
   }
   /* Shared placement of the three little science icons, in the band below the key figures */
   .transit, .rv, .flare { pointer-events: auto; }
-  .rv { position: absolute; width: 80px; bottom: 6px; left: calc(50% - 40px); }
+  /* the radial-velocity icon mirrors the transit, in the opposite bottom corner */
+  .rv { position: absolute; width: 80px; bottom: 6px; left: max(24px, calc((100% - 1080px) / 2 - 84px)); }
   /* the flaring M dwarf mirrors the ringed planet, on the other side of the header */
   .flare { position: absolute; width: 64px; top: 73px; left: max(36px, calc((100% - 1080px) / 2 - 68px)); }
   @media (max-width: 719px) {
-    .rv { width: 54px; left: calc(50% - 60px); }
-    .flare { width: 40px; top: auto; bottom: 10px; left: calc(50% + 8px); }
+    .rv { width: 54px; left: 16px; }
+    .flare { width: 40px; top: auto; bottom: 10px; left: calc(50% - 62px); }
   }
 
   /* Radial velocity: the star wobbles and is Doppler-tinted as its planet orbits (10 s period) */
