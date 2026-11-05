@@ -113,10 +113,65 @@
     60.9% { transform: translate(39px, 7px); } 68.7% { transform: translate(44px, 0); }
     100% { transform: translate(64px, 0); }
   }
+  /* Shared placement of the three little science icons, in the band below the key figures */
+  .transit, .rv, .flare { pointer-events: auto; }
+  .rv { position: absolute; width: 80px; bottom: 6px; left: calc(50% - 40px); }
+  .flare { position: absolute; width: 80px; bottom: 6px; left: max(24px, calc((100% - 1080px) / 2 - 84px)); }
+  @media (max-width: 719px) {
+    .rv { width: 54px; left: calc(50% - 60px); }
+    .flare { width: 54px; left: calc(50% + 4px); }
+  }
+
+  /* Radial velocity: the star wobbles and is Doppler-tinted as its planet orbits (10 s period) */
+  .sine { animation-timing-function: cubic-bezier(.37, 0, .63, 1); animation-direction: alternate; animation-iteration-count: infinite; animation-duration: 5s; }
+  .rv .rv-px { animation-name: rv-px; }
+  .rv .rv-py { animation-name: rv-py; animation-delay: -2.5s; }
+  .rv .rv-wobble { animation-name: rv-wobble; }
+  .rv .rv-dot-y { animation-name: rv-dot-y; }
+  .rv .rv-dot-x { animation: rv-dot-x 10s linear infinite; }
+  .rv .rv-star { animation: rv-doppler 10s linear infinite; }
+  @keyframes rv-px { from { transform: translateX(-30px); } to { transform: translateX(30px); } }
+  @keyframes rv-py { from { transform: translateY(-16px); } to { transform: translateY(16px); } }
+  @keyframes rv-wobble { from { transform: translateX(3px); } to { transform: translateX(-3px); } }
+  @keyframes rv-dot-y { from { transform: translateY(0); } to { transform: translateY(12px); } }
+  @keyframes rv-dot-x { from { transform: translateX(0); } to { transform: translateX(64px); } }
+  @keyframes rv-doppler { 0%, 100% { fill: #ff9d84; } 25%, 75% { fill: #fff1d6; } 50% { fill: #9cc8ff; } }
+
+  /* Flare on an M dwarf: fast rise, slow decay (8 s cycle) */
+  .flare .fl-burst { animation: fl-burst 8s linear infinite; }
+  .flare .fl-dot { animation: fl-dot 8s linear infinite; }
+  @keyframes fl-burst {
+    0%, 25% { opacity: 0; } 28.1% { opacity: 1; } 35% { opacity: .55; }
+    45% { opacity: .2; } 55% { opacity: .05; } 60%, 100% { opacity: 0; }
+  }
+  @keyframes fl-dot {
+    0.0% { transform: translate(0.0px, 0px); }
+    25.0% { transform: translate(16.0px, 0px); }
+    28.1% { transform: translate(18.0px, -13px); }
+    30.0% { transform: translate(19.2px, -9.5px); }
+    32.0% { transform: translate(20.5px, -7.2px); }
+    35.0% { transform: translate(22.4px, -5px); }
+    38.0% { transform: translate(24.3px, -3.5px); }
+    42.0% { transform: translate(26.9px, -2.2px); }
+    50.0% { transform: translate(32.0px, -0.9px); }
+    60.0% { transform: translate(38.4px, -0.3px); }
+    70.0% { transform: translate(44.8px, 0px); }
+    100.0% { transform: translate(64.0px, 0px); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .transit .tr-planet, .transit .tr-star, .transit .tr-dot { animation: none; }
     .transit .tr-star { opacity: .8; }
     .transit .tr-dot { transform: translate(32px, 8.25px); }
+    .rv .rv-px, .rv .rv-py, .rv .rv-wobble, .rv .rv-dot-y, .rv .rv-dot-x, .rv .rv-star,
+    .flare .fl-burst, .flare .fl-dot { animation: none; }
+    .rv .rv-px { transform: translateX(30px); }
+    .rv .rv-wobble { transform: translateX(-3px); }
+    .rv .rv-star { fill: #9cc8ff; }
+    .rv .rv-dot-x { transform: translateX(32px); }
+    .rv .rv-dot-y { transform: translateY(12px); }
+    .flare .fl-burst { opacity: 1; }
+    .flare .fl-dot { transform: translate(18px, -13px); }
   }
 
   .topbar {
@@ -340,7 +395,47 @@
       <circle cx="15" cy="15" r="13.5" fill="none" stroke="#9fd0ff" stroke-opacity=".22" stroke-width="1.5"/>
       <circle cx="15" cy="15" r="11" fill="url(#pl-blue)"/>
     </svg>
+    <svg class="rv" viewBox="0 0 80 72" focusable="false">
+      <title>Radial velocity: the orbiting planet makes its star wobble, towards us and away (WP1, WP2)</title>
+      <defs>
+        <radialGradient id="rv-glow"><stop offset="0" stop-color="#fff1d6" stop-opacity=".4"/><stop offset="1" stop-color="#fff1d6" stop-opacity="0"/></radialGradient>
+      </defs>
+      <ellipse cx="40" cy="22" rx="30" ry="16" fill="none" stroke="#a9c4ff" stroke-opacity=".22" stroke-width=".8" stroke-dasharray="2 2.5"/>
+      <g class="rv-wobble sine">
+        <circle cx="40" cy="22" r="17" fill="url(#rv-glow)"/>
+        <circle class="rv-star" cx="40" cy="22" r="10" fill="#fff1d6"/>
+      </g>
+      <g class="rv-px sine"><g class="rv-py sine">
+        <circle cx="40" cy="22" r="3.2" fill="#6fc3ff"/>
+      </g></g>
+      <polyline points="8.0,52.00 10.0,52.12 12.0,52.46 14.0,53.01 16.0,53.76 18.0,54.67 20.0,55.70 22.0,56.83 24.0,58.00 26.0,59.17 28.0,60.30 30.0,61.33 32.0,62.24 34.0,62.99 36.0,63.54 38.0,63.88 40.0,64.00 42.0,63.88 44.0,63.54 46.0,62.99 48.0,62.24 50.0,61.33 52.0,60.30 54.0,59.17 56.0,58.00 58.0,56.83 60.0,55.70 62.0,54.67 64.0,53.76 66.0,53.01 68.0,52.46 70.0,52.12 72.0,52.00" fill="none" stroke="#cfdc4f" stroke-opacity=".7" stroke-width="1.1" stroke-linejoin="round"/>
+      <g class="rv-dot-x"><g class="rv-dot-y sine">
+        <circle cx="8" cy="52" r="1.8" fill="#cfdc4f"/>
+      </g></g>
+    </svg>
+    <svg class="flare" viewBox="0 0 80 72" focusable="false">
+      <title>A flare on an M dwarf: sudden brightening, slow decay (WP1, WP5)</title>
+      <defs>
+        <radialGradient id="fl-disk" cx="45%" cy="42%" r="60%">
+          <stop offset="0" stop-color="#ff9a6a"/><stop offset=".7" stop-color="#d9431f"/><stop offset="1" stop-color="#7a1a0c"/>
+        </radialGradient>
+        <radialGradient id="fl-glow"><stop offset="0" stop-color="#ff7a4d" stop-opacity=".35"/><stop offset="1" stop-color="#ff7a4d" stop-opacity="0"/></radialGradient>
+        <radialGradient id="fl-hot"><stop offset="0" stop-color="#ffffff"/><stop offset=".35" stop-color="#fff3c9" stop-opacity=".9"/><stop offset="1" stop-color="#fff3c9" stop-opacity="0"/></radialGradient>
+      </defs>
+      <circle cx="40" cy="25" r="19" fill="url(#fl-glow)"/>
+      <circle cx="40" cy="25" r="12" fill="url(#fl-disk)"/>
+      <ellipse cx="35.5" cy="28.5" rx="2.4" ry="1.6" fill="#6e1608" fill-opacity=".55"/>
+      <ellipse cx="43" cy="20.5" rx="1.6" ry="1.1" fill="#6e1608" fill-opacity=".5"/>
+      <g class="fl-burst">
+        <circle cx="40" cy="25" r="21" fill="url(#fl-glow)"/>
+        <path d="M47.5 16.5 C52 8, 59 10, 55.5 18.5" fill="none" stroke="#fff3c9" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="48" cy="17.5" r="5.5" fill="url(#fl-hot)"/>
+      </g>
+      <polyline points="8.0,62.0 24.0,62.0 26.0,49.0 27.2,52.5 28.5,54.8 30.4,57.0 32.3,58.5 34.9,59.8 40.0,61.1 46.4,61.7 52.8,62.0 72.0,62.0" fill="none" stroke="#cfdc4f" stroke-opacity=".7" stroke-width="1.1" stroke-linejoin="round"/>
+      <circle class="fl-dot" cx="8" cy="62" r="1.8" fill="#cfdc4f"/>
+    </svg>
     <svg class="transit" viewBox="0 0 80 72" focusable="false">
+      <title>A transiting planet: the star dims as the planet passes in front of it (WP1, WP2, WP4)</title>
       <defs>
         <radialGradient id="tr-limb" cx="50%" cy="50%" r="50%">
           <stop offset="0" stop-color="#fffaf0"/><stop offset=".6" stop-color="#ffe3a8"/>
