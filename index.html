@@ -97,6 +97,28 @@
   @media (max-width: 899px) { .planet-red { display: none; } }
   @media (max-width: 719px) { .planet-ringed { width: 72px; top: auto; bottom: 12px; right: 18px; } }
 
+  /* A transiting planet, with its light curve drawn underneath (12 s cycle) */
+  .transit { position: absolute; width: 80px; bottom: 6px; right: max(24px, calc((100% - 1080px) / 2 - 84px)); }
+  @media (max-width: 719px) { .transit { width: 54px; bottom: 6px; right: auto; left: 16px; } }
+  .transit .tr-planet { animation: tr-cross 12s linear infinite; }
+  .transit .tr-star { animation: tr-dim 12s linear infinite; }
+  .transit .tr-dot { animation: tr-curve 12s linear infinite; }
+  @keyframes tr-cross { from { transform: translateX(-54px); } to { transform: translateX(54px); } }
+  @keyframes tr-dim {
+    0%, 31.3% { opacity: 1; } 39.1%, 60.9% { opacity: .8; } 68.7%, 100% { opacity: 1; }
+  }
+  @keyframes tr-curve {
+    0% { transform: translate(0, 0); } 31.3% { transform: translate(20px, 0); }
+    39.1% { transform: translate(25px, 7px); } 50% { transform: translate(32px, 8.25px); }
+    60.9% { transform: translate(39px, 7px); } 68.7% { transform: translate(44px, 0); }
+    100% { transform: translate(64px, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .transit .tr-planet, .transit .tr-star, .transit .tr-dot { animation: none; }
+    .transit .tr-star { opacity: .8; }
+    .transit .tr-dot { transform: translate(32px, 8.25px); }
+  }
+
   .topbar {
     display: flex; align-items: center; justify-content: space-between;
     gap: 16px; padding: 18px 0;
@@ -317,6 +339,27 @@
       </defs>
       <circle cx="15" cy="15" r="13.5" fill="none" stroke="#9fd0ff" stroke-opacity=".22" stroke-width="1.5"/>
       <circle cx="15" cy="15" r="11" fill="url(#pl-blue)"/>
+    </svg>
+    <svg class="transit" viewBox="0 0 80 72" focusable="false">
+      <defs>
+        <radialGradient id="tr-limb" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#fffaf0"/><stop offset=".6" stop-color="#ffe3a8"/>
+          <stop offset=".9" stop-color="#f5a65b"/><stop offset="1" stop-color="#e0823c"/>
+        </radialGradient>
+        <radialGradient id="tr-glow">
+          <stop offset="0" stop-color="#ffe9c4" stop-opacity=".45"/><stop offset="1" stop-color="#ffe9c4" stop-opacity="0"/>
+        </radialGradient>
+        <clipPath id="tr-disk"><circle cx="40" cy="24" r="16"/></clipPath>
+      </defs>
+      <g class="tr-star">
+        <circle cx="40" cy="24" r="24" fill="url(#tr-glow)"/>
+        <circle cx="40" cy="24" r="16" fill="url(#tr-limb)"/>
+      </g>
+      <g clip-path="url(#tr-disk)">
+        <circle class="tr-planet" cx="40" cy="28" r="4.2" fill="#060a12"/>
+      </g>
+      <path d="M8 58 H28 L33 65 Q40 67.5 47 65 L52 58 H72" fill="none" stroke="#cfdc4f" stroke-opacity=".7" stroke-width="1.1" stroke-linejoin="round"/>
+      <circle class="tr-dot" cx="8" cy="58" r="1.8" fill="#cfdc4f"/>
     </svg>
     <svg class="planet planet-red" viewBox="0 0 12 12" focusable="false">
       <defs>
