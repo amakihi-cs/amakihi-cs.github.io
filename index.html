@@ -90,7 +90,10 @@
   }
   @media (prefers-reduced-motion: reduce) { .twinkle { animation: none; opacity: .7; } }
   .planet { position: absolute; display: block; height: auto; }
-  .planet-ringed { width: 96px; top: 76px; right: max(20px, calc((100% - 1080px) / 2 - 84px)); }
+  .planet-ringed { width: 110px; top: 72px; right: max(13px, calc((100% - 1080px) / 2 - 91px)); }
+  /* the gas giant's clouds turn once every 10 s */
+  .planet-ringed .pl-spin { animation: pl-spin 10s linear infinite; }
+  @keyframes pl-spin { from { transform: translateX(0); } to { transform: translateX(-48px); } }
   .planet-blue { width: 26px; top: 60%; left: calc((100% - 1080px) / 2 - 40px); }
   .planet-red { width: 11px; top: 104px; left: 47%; }
   @media (max-width: 1239px) { .planet-blue { display: none; } }
@@ -160,7 +163,7 @@
     .transit .tr-planet, .transit .tr-star, .transit .tr-dot { animation: none; }
     .transit .tr-star { opacity: .8; }
     .transit .tr-dot { transform: translate(32px, 8.25px); }
-    .rv .rv-px, .rv .rv-py, .rv .rv-wobble, .rv .rv-star, .rv .rv-pt, .flare .fl-burst { animation: none; }
+    .rv .rv-px, .rv .rv-py, .rv .rv-wobble, .rv .rv-star, .rv .rv-pt, .flare .fl-burst, .planet-ringed .pl-spin { animation: none; }
     .rv .rv-px { transform: translateX(30px); }
     .rv .rv-wobble { transform: translateX(-3px); }
     .rv .rv-star { fill: #9cc8ff; }
@@ -367,6 +370,11 @@
           <stop offset="0" stop-color="#f6e2b3"/><stop offset=".45" stop-color="#d3a464"/>
           <stop offset=".8" stop-color="#7c5129"/><stop offset="1" stop-color="#2e1c0e"/>
         </radialGradient>
+        <radialGradient id="pl-shade" cx="36%" cy="32%" r="72%">
+          <stop offset="0" stop-color="#fff6dd" stop-opacity=".18"/><stop offset=".55" stop-color="#2e1c0e" stop-opacity="0"/>
+          <stop offset="1" stop-color="#1a0f06" stop-opacity=".85"/>
+        </radialGradient>
+        <clipPath id="pl-disk"><circle cx="60" cy="38" r="21"/></clipPath>
         <clipPath id="ring-back"><rect x="0" y="0" width="120" height="38"/></clipPath>
         <clipPath id="ring-front"><rect x="0" y="38" width="120" height="32"/></clipPath>
       </defs>
@@ -374,6 +382,38 @@
         <ellipse cx="60" cy="38" rx="52" ry="10" fill="none" stroke="#ead8aa" stroke-opacity=".5" stroke-width="3.2" clip-path="url(#ring-back)"/>
       </g>
       <circle cx="60" cy="38" r="21" fill="url(#pl-ringed)"/>
+      <g clip-path="url(#pl-disk)">
+        <g transform="rotate(-16 60 38)">
+          <g class="pl-spin">
+            <path d="M36 20.50 L38 20.75 L40 20.93 L42 21.00 L44 20.93 L46 20.75 L48 20.50 L50 20.25 L52 20.07 L54 20.00 L56 20.07 L58 20.25 L60 20.50 L62 20.75 L64 20.93 L66 21.00 L68 20.93 L70 20.75 L72 20.50 L74 20.25 L76 20.07 L78 20.00 L80 20.07 L82 20.25 L84 20.50 L86 20.75 L88 20.93 L90 21.00 L92 20.93 L94 20.75 L96 20.50 L98 20.25 L100 20.07 L102 20.00 L104 20.07 L106 20.25 L108 20.50 L110 20.75 L112 20.93 L114 21.00 L116 20.93 L118 20.75 L120 20.50 L122 20.25 L124 20.07 L126 20.00 L128 20.07 L130 20.25 L132 20.50 L132 25.98 L130 25.85 L128 25.63 L126 25.37 L124 25.14 L122 25.02 L120 25.02 L118 25.15 L116 25.37 L114 25.63 L112 25.86 L110 25.98 L108 25.98 L106 25.85 L104 25.63 L102 25.37 L100 25.14 L98 25.02 L96 25.02 L94 25.15 L92 25.37 L90 25.63 L88 25.86 L86 25.98 L84 25.98 L82 25.85 L80 25.63 L78 25.37 L76 25.14 L74 25.02 L72 25.02 L70 25.15 L68 25.37 L66 25.63 L64 25.86 L62 25.98 L60 25.98 L58 25.85 L56 25.63 L54 25.37 L52 25.14 L50 25.02 L48 25.02 L46 25.15 L44 25.37 L42 25.63 L40 25.86 L38 25.98 L36 25.98Z" fill="#8a5a2b" fill-opacity="0.45"/>
+            <path d="M36 27.20 L38 27.25 L40 27.18 L42 27.00 L44 26.78 L46 26.55 L48 26.40 L50 26.35 L52 26.42 L54 26.60 L56 26.82 L58 27.05 L60 27.20 L62 27.25 L64 27.18 L66 27.00 L68 26.78 L70 26.55 L72 26.40 L74 26.35 L76 26.42 L78 26.60 L80 26.82 L82 27.05 L84 27.20 L86 27.25 L88 27.18 L90 27.00 L92 26.78 L94 26.55 L96 26.40 L98 26.35 L100 26.42 L102 26.60 L104 26.82 L106 27.05 L108 27.20 L110 27.25 L112 27.18 L114 27.00 L116 26.78 L118 26.55 L120 26.40 L122 26.35 L124 26.42 L126 26.60 L128 26.82 L130 27.05 L132 27.20 L132 31.50 L130 31.63 L128 31.64 L126 31.53 L124 31.34 L122 31.10 L120 30.90 L118 30.77 L116 30.76 L114 30.87 L112 31.06 L110 31.30 L108 31.50 L106 31.63 L104 31.64 L102 31.53 L100 31.34 L98 31.10 L96 30.90 L94 30.77 L92 30.76 L90 30.87 L88 31.06 L86 31.30 L84 31.50 L82 31.63 L80 31.64 L78 31.53 L76 31.34 L74 31.10 L72 30.90 L70 30.77 L68 30.76 L66 30.87 L64 31.06 L62 31.30 L60 31.50 L58 31.63 L56 31.64 L54 31.53 L52 31.34 L50 31.10 L48 30.90 L46 30.77 L44 30.76 L42 30.87 L40 31.06 L38 31.30 L36 31.50Z" fill="#f7e6bf" fill-opacity="0.55"/>
+            <path d="M36 31.81 L38 31.57 L40 31.29 L42 31.03 L44 30.88 L46 30.86 L48 30.99 L50 31.23 L52 31.51 L54 31.77 L56 31.92 L58 31.94 L60 31.81 L62 31.57 L64 31.29 L66 31.03 L68 30.88 L70 30.86 L72 30.99 L74 31.23 L76 31.51 L78 31.77 L80 31.92 L82 31.94 L84 31.81 L86 31.57 L88 31.29 L90 31.03 L92 30.88 L94 30.86 L96 30.99 L98 31.23 L100 31.51 L102 31.77 L104 31.92 L106 31.94 L108 31.81 L110 31.57 L112 31.29 L114 31.03 L116 30.88 L118 30.86 L120 30.99 L122 31.23 L124 31.51 L126 31.77 L128 31.92 L130 31.94 L132 31.81 L132 36.36 L130 36.64 L128 36.91 L126 37.09 L124 37.15 L122 37.06 L120 36.84 L118 36.56 L116 36.29 L114 36.11 L112 36.05 L110 36.14 L108 36.36 L106 36.64 L104 36.91 L102 37.09 L100 37.15 L98 37.06 L96 36.84 L94 36.56 L92 36.29 L90 36.11 L88 36.05 L86 36.14 L84 36.36 L82 36.64 L80 36.91 L78 37.09 L76 37.15 L74 37.06 L72 36.84 L70 36.56 L68 36.29 L66 36.11 L64 36.05 L62 36.14 L60 36.36 L58 36.64 L56 36.91 L54 37.09 L52 37.15 L50 37.06 L48 36.84 L46 36.56 L44 36.29 L42 36.11 L40 36.05 L38 36.14 L36 36.36Z" fill="#a96f38" fill-opacity="0.5"/>
+            <path d="M36 36.96 L38 37.12 L40 37.20 L42 37.17 L44 37.04 L46 36.85 L48 36.64 L50 36.48 L52 36.40 L54 36.43 L56 36.56 L58 36.75 L60 36.96 L62 37.12 L64 37.20 L66 37.17 L68 37.04 L70 36.85 L72 36.64 L74 36.48 L76 36.40 L78 36.43 L80 36.56 L82 36.75 L84 36.96 L86 37.12 L88 37.20 L90 37.17 L92 37.04 L94 36.85 L96 36.64 L98 36.48 L100 36.40 L102 36.43 L104 36.56 L106 36.75 L108 36.96 L110 37.12 L112 37.20 L114 37.17 L116 37.04 L118 36.85 L120 36.64 L122 36.48 L124 36.40 L126 36.43 L128 36.56 L130 36.75 L132 36.96 L132 41.60 L130 41.57 L128 41.44 L126 41.25 L124 41.05 L122 40.88 L120 40.80 L118 40.83 L116 40.96 L114 41.15 L112 41.35 L110 41.52 L108 41.60 L106 41.57 L104 41.44 L102 41.25 L100 41.05 L98 40.88 L96 40.80 L94 40.83 L92 40.96 L90 41.15 L88 41.35 L86 41.52 L84 41.60 L82 41.57 L80 41.44 L78 41.25 L76 41.05 L74 40.88 L72 40.80 L70 40.83 L68 40.96 L66 41.15 L64 41.35 L62 41.52 L60 41.60 L58 41.57 L56 41.44 L54 41.25 L52 41.05 L50 40.88 L48 40.80 L46 40.83 L44 40.96 L42 41.15 L40 41.35 L38 41.52 L36 41.60Z" fill="#fbeccc" fill-opacity="0.6"/>
+            <path d="M36 41.28 L38 40.98 L40 40.73 L42 40.61 L44 40.64 L46 40.83 L48 41.12 L50 41.42 L52 41.67 L54 41.79 L56 41.76 L58 41.57 L60 41.28 L62 40.98 L64 40.73 L66 40.61 L68 40.64 L70 40.83 L72 41.12 L74 41.42 L76 41.67 L78 41.79 L80 41.76 L82 41.57 L84 41.28 L86 40.98 L88 40.73 L90 40.61 L92 40.64 L94 40.83 L96 41.12 L98 41.42 L100 41.67 L102 41.79 L104 41.76 L106 41.57 L108 41.28 L110 40.98 L112 40.73 L114 40.61 L116 40.64 L118 40.83 L120 41.12 L122 41.42 L124 41.67 L126 41.79 L128 41.76 L130 41.57 L132 41.28 L132 46.25 L130 46.44 L128 46.73 L126 47.04 L124 47.28 L122 47.40 L120 47.35 L118 47.16 L116 46.87 L114 46.56 L112 46.32 L110 46.20 L108 46.25 L106 46.44 L104 46.73 L102 47.04 L100 47.28 L98 47.40 L96 47.35 L94 47.16 L92 46.87 L90 46.56 L88 46.32 L86 46.20 L84 46.25 L82 46.44 L80 46.73 L78 47.04 L76 47.28 L74 47.40 L72 47.35 L70 47.16 L68 46.87 L66 46.56 L64 46.32 L62 46.20 L60 46.25 L58 46.44 L56 46.73 L54 47.04 L52 47.28 L50 47.40 L48 47.35 L46 47.16 L44 46.87 L42 46.56 L40 46.32 L38 46.20 L36 46.25Z" fill="#9c6431" fill-opacity="0.5"/>
+            <path d="M36 47.45 L38 47.36 L40 47.17 L42 46.94 L44 46.73 L46 46.58 L48 46.55 L50 46.64 L52 46.83 L54 47.06 L56 47.27 L58 47.42 L60 47.45 L62 47.36 L64 47.17 L66 46.94 L68 46.73 L70 46.58 L72 46.55 L74 46.64 L76 46.83 L78 47.06 L80 47.27 L82 47.42 L84 47.45 L86 47.36 L88 47.17 L90 46.94 L92 46.73 L94 46.58 L96 46.55 L98 46.64 L100 46.83 L102 47.06 L104 47.27 L106 47.42 L108 47.45 L110 47.36 L112 47.17 L114 46.94 L116 46.73 L118 46.58 L120 46.55 L122 46.64 L124 46.83 L126 47.06 L128 47.27 L130 47.42 L132 47.45 L132 51.06 L130 51.28 L128 51.42 L126 51.45 L124 51.35 L122 51.17 L120 50.94 L118 50.72 L116 50.58 L114 50.55 L112 50.65 L110 50.83 L108 51.06 L106 51.28 L104 51.42 L102 51.45 L100 51.35 L98 51.17 L96 50.94 L94 50.72 L92 50.58 L90 50.55 L88 50.65 L86 50.83 L84 51.06 L82 51.28 L80 51.42 L78 51.45 L76 51.35 L74 51.17 L72 50.94 L70 50.72 L68 50.58 L66 50.55 L64 50.65 L62 50.83 L60 51.06 L58 51.28 L56 51.42 L54 51.45 L52 51.35 L50 51.17 L48 50.94 L46 50.72 L44 50.58 L42 50.55 L40 50.65 L38 50.83 L36 51.06Z" fill="#f3dcae" fill-opacity="0.45"/>
+            <path d="M36 51.76 L38 51.51 L40 51.26 L42 51.07 L44 51.00 L46 51.06 L48 51.24 L50 51.49 L52 51.74 L54 51.93 L56 52.00 L58 51.94 L60 51.76 L62 51.51 L64 51.26 L66 51.07 L68 51.00 L70 51.06 L72 51.24 L74 51.49 L76 51.74 L78 51.93 L80 52.00 L82 51.94 L84 51.76 L86 51.51 L88 51.26 L90 51.07 L92 51.00 L94 51.06 L96 51.24 L98 51.49 L100 51.74 L102 51.93 L104 52.00 L106 51.94 L108 51.76 L110 51.51 L112 51.26 L114 51.07 L116 51.00 L118 51.06 L120 51.24 L122 51.49 L124 51.74 L126 51.93 L128 52.00 L130 51.94 L132 51.76 L132 56.16 L130 56.38 L128 56.64 L126 56.86 L124 56.99 L122 56.98 L120 56.84 L118 56.62 L116 56.36 L114 56.14 L112 56.01 L110 56.02 L108 56.16 L106 56.38 L104 56.64 L102 56.86 L100 56.99 L98 56.98 L96 56.84 L94 56.62 L92 56.36 L90 56.14 L88 56.01 L86 56.02 L84 56.16 L82 56.38 L80 56.64 L78 56.86 L76 56.99 L74 56.98 L72 56.84 L70 56.62 L68 56.36 L66 56.14 L64 56.01 L62 56.02 L60 56.16 L58 56.38 L56 56.64 L54 56.86 L52 56.99 L50 56.98 L48 56.84 L46 56.62 L44 56.36 L42 56.14 L40 56.01 L38 56.02 L36 56.16Z" fill="#7a4c24" fill-opacity="0.45"/>
+            <ellipse cx="42" cy="29" rx="3.2" ry="1.0" fill="#fffaf0" fill-opacity="0.55"/>
+            <ellipse cx="58" cy="29.5" rx="2.2" ry="0.8" fill="#fffaf0" fill-opacity="0.45"/>
+            <ellipse cx="74" cy="28.5" rx="2.8" ry="0.9" fill="#fffaf0" fill-opacity="0.5"/>
+            <ellipse cx="50" cy="39.2" rx="3.6" ry="1.0" fill="#fffdf5" fill-opacity="0.5"/>
+            <ellipse cx="69" cy="38.6" rx="2.4" ry="0.8" fill="#fffdf5" fill-opacity="0.45"/>
+            <ellipse cx="80" cy="39.5" rx="1.8" ry="0.7" fill="#fffdf5" fill-opacity="0.4"/>
+            <ellipse cx="46" cy="49" rx="2.6" ry="0.8" fill="#fff6e2" fill-opacity="0.4"/>
+            <ellipse cx="64" cy="49.4" rx="2.0" ry="0.7" fill="#fff6e2" fill-opacity="0.35"/>
+            <ellipse cx="66" cy="44.4" rx="4.3" ry="2.5999999999999996" fill="#f6d6a8" fill-opacity=".45"/><ellipse cx="66" cy="44.4" rx="3.4" ry="1.9" fill="#c4573a" fill-opacity=".8"/>
+            <ellipse cx="90" cy="29" rx="3.2" ry="1.0" fill="#fffaf0" fill-opacity="0.55"/>
+            <ellipse cx="106" cy="29.5" rx="2.2" ry="0.8" fill="#fffaf0" fill-opacity="0.45"/>
+            <ellipse cx="122" cy="28.5" rx="2.8" ry="0.9" fill="#fffaf0" fill-opacity="0.5"/>
+            <ellipse cx="98" cy="39.2" rx="3.6" ry="1.0" fill="#fffdf5" fill-opacity="0.5"/>
+            <ellipse cx="117" cy="38.6" rx="2.4" ry="0.8" fill="#fffdf5" fill-opacity="0.45"/>
+            <ellipse cx="128" cy="39.5" rx="1.8" ry="0.7" fill="#fffdf5" fill-opacity="0.4"/>
+            <ellipse cx="94" cy="49" rx="2.6" ry="0.8" fill="#fff6e2" fill-opacity="0.4"/>
+            <ellipse cx="112" cy="49.4" rx="2.0" ry="0.7" fill="#fff6e2" fill-opacity="0.35"/>
+            <ellipse cx="114" cy="44.4" rx="4.3" ry="2.5999999999999996" fill="#f6d6a8" fill-opacity=".45"/><ellipse cx="114" cy="44.4" rx="3.4" ry="1.9" fill="#c4573a" fill-opacity=".8"/>
+          </g>
+        </g>
+      </g>
+      <circle cx="60" cy="38" r="21" fill="url(#pl-shade)"/>
       <g transform="rotate(-16 60 38)">
         <ellipse cx="60" cy="38" rx="52" ry="10" fill="none" stroke="#ead8aa" stroke-opacity=".8" stroke-width="3.2" clip-path="url(#ring-front)"/>
         <ellipse cx="60" cy="38" rx="45" ry="8.3" fill="none" stroke="#ead8aa" stroke-opacity=".35" stroke-width="1.4" clip-path="url(#ring-front)"/>
