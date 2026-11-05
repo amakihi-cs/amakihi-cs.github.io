@@ -63,19 +63,40 @@
 
   /* Header and hero */
   .hero {
+    position: relative; overflow: hidden;
     color: var(--hero-ink);
     background:
-      radial-gradient(1.5px 1.5px at 12% 22%, rgba(255,255,255,.75), transparent 60%),
-      radial-gradient(1px 1px at 27% 68%, rgba(255,255,255,.55), transparent 60%),
-      radial-gradient(1.5px 1.5px at 41% 14%, rgba(255,255,255,.6), transparent 60%),
-      radial-gradient(1px 1px at 58% 47%, rgba(255,255,255,.5), transparent 60%),
-      radial-gradient(1.5px 1.5px at 73% 76%, rgba(255,255,255,.65), transparent 60%),
-      radial-gradient(1px 1px at 88% 31%, rgba(255,255,255,.55), transparent 60%),
-      radial-gradient(1px 1px at 94% 88%, rgba(255,255,255,.45), transparent 60%),
-      radial-gradient(1px 1px at 6% 84%, rgba(255,255,255,.45), transparent 60%),
+      url("img/sky.svg") center top / 1600px 1000px repeat,
       radial-gradient(60% 90% at 88% 0%, rgba(207,220,79,.16), transparent 70%),
       linear-gradient(180deg, var(--hero-bg), var(--hero-bg-2));
   }
+  .hero > .wrap { position: relative; z-index: 1; }
+
+  /* Sky decorations: twinkling stars and planets, kept in the free margins */
+  .sky { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  .twinkle {
+    position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #fff;
+    box-shadow: 0 0 6px 1px rgba(255,255,255,.55); opacity: .3;
+    animation: twinkle 4.5s ease-in-out infinite;
+  }
+  .twinkle:nth-child(2) { animation-duration: 6s; animation-delay: -2s; }
+  .twinkle:nth-child(3) { animation-duration: 5.2s; animation-delay: -3.4s; }
+  .twinkle:nth-child(4) { animation-duration: 7s; animation-delay: -1.2s; }
+  .twinkle:nth-child(5) { animation-duration: 3.8s; animation-delay: -2.7s; }
+  .twinkle:nth-child(6) { animation-duration: 6.5s; animation-delay: -4.1s; }
+  @keyframes twinkle {
+    0%, 100% { opacity: .22; transform: scale(.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+  @media (prefers-reduced-motion: reduce) { .twinkle { animation: none; opacity: .7; } }
+  .planet { position: absolute; display: block; height: auto; }
+  .planet-ringed { width: 96px; top: 76px; right: max(20px, calc((100% - 1080px) / 2 - 84px)); }
+  .planet-blue { width: 26px; top: 60%; left: calc((100% - 1080px) / 2 - 40px); }
+  .planet-red { width: 11px; top: 104px; left: 47%; }
+  @media (max-width: 1239px) { .planet-blue { display: none; } }
+  @media (max-width: 899px) { .planet-red { display: none; } }
+  @media (max-width: 719px) { .planet-ringed { width: 72px; top: auto; bottom: 12px; right: 18px; } }
+
   .topbar {
     display: flex; align-items: center; justify-content: space-between;
     gap: 16px; padding: 18px 0;
@@ -243,7 +264,9 @@
   /* Members panel */
   .members {
     margin: 0; padding: 30px; border-radius: var(--radius);
-    background: linear-gradient(135deg, var(--hero-bg), var(--hero-bg-2));
+    background:
+      url("img/sky.svg") left top / 1600px 1000px repeat,
+      linear-gradient(135deg, var(--hero-bg), var(--hero-bg-2));
     color: var(--hero-ink);
     display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
   }
@@ -260,6 +283,50 @@
 <body>
 
 <header class="hero">
+  <div class="sky" aria-hidden="true">
+    <span class="twinkle" style="left:6%;top:16%"></span>
+    <span class="twinkle" style="left:37%;top:7%"></span>
+    <span class="twinkle" style="left:58%;top:95%"></span>
+    <span class="twinkle" style="left:94%;top:58%"></span>
+    <span class="twinkle" style="left:22%;top:88%"></span>
+    <span class="twinkle" style="left:77%;top:12%"></span>
+    <svg class="planet planet-ringed" viewBox="0 0 120 70" focusable="false">
+      <defs>
+        <radialGradient id="pl-ringed" cx="36%" cy="32%" r="75%">
+          <stop offset="0" stop-color="#f6e2b3"/><stop offset=".45" stop-color="#d3a464"/>
+          <stop offset=".8" stop-color="#7c5129"/><stop offset="1" stop-color="#2e1c0e"/>
+        </radialGradient>
+        <clipPath id="ring-back"><rect x="0" y="0" width="120" height="38"/></clipPath>
+        <clipPath id="ring-front"><rect x="0" y="38" width="120" height="32"/></clipPath>
+      </defs>
+      <g transform="rotate(-16 60 38)">
+        <ellipse cx="60" cy="38" rx="52" ry="10" fill="none" stroke="#ead8aa" stroke-opacity=".5" stroke-width="3.2" clip-path="url(#ring-back)"/>
+      </g>
+      <circle cx="60" cy="38" r="21" fill="url(#pl-ringed)"/>
+      <g transform="rotate(-16 60 38)">
+        <ellipse cx="60" cy="38" rx="52" ry="10" fill="none" stroke="#ead8aa" stroke-opacity=".8" stroke-width="3.2" clip-path="url(#ring-front)"/>
+        <ellipse cx="60" cy="38" rx="45" ry="8.3" fill="none" stroke="#ead8aa" stroke-opacity=".35" stroke-width="1.4" clip-path="url(#ring-front)"/>
+      </g>
+    </svg>
+    <svg class="planet planet-blue" viewBox="0 0 30 30" focusable="false">
+      <defs>
+        <radialGradient id="pl-blue" cx="35%" cy="30%" r="80%">
+          <stop offset="0" stop-color="#cfe8ff"/><stop offset=".45" stop-color="#4f93d6"/>
+          <stop offset=".85" stop-color="#173a63"/><stop offset="1" stop-color="#0b1a2e"/>
+        </radialGradient>
+      </defs>
+      <circle cx="15" cy="15" r="13.5" fill="none" stroke="#9fd0ff" stroke-opacity=".22" stroke-width="1.5"/>
+      <circle cx="15" cy="15" r="11" fill="url(#pl-blue)"/>
+    </svg>
+    <svg class="planet planet-red" viewBox="0 0 12 12" focusable="false">
+      <defs>
+        <radialGradient id="pl-red" cx="35%" cy="30%" r="80%">
+          <stop offset="0" stop-color="#ffb08a"/><stop offset=".6" stop-color="#c2502c"/><stop offset="1" stop-color="#4a1a0c"/>
+        </radialGradient>
+      </defs>
+      <circle cx="6" cy="6" r="5" fill="url(#pl-red)"/>
+    </svg>
+  </div>
   <div class="wrap">
     <div class="topbar">
       <a class="brand" href="#top" id="top">ʻAmakihi</a>

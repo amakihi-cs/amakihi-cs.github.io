@@ -166,7 +166,7 @@ TEMPLATE = """<!doctype html>
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
   @media (min-width: 720px) { .wrap { padding: 0 32px; } }
 
-  .hero { color: var(--hero-ink); background: radial-gradient(60% 90% at 88% 0%, rgba(207,220,79,.14), transparent 70%), linear-gradient(180deg, var(--hero-bg), var(--hero-bg-2)); }
+  .hero { color: var(--hero-ink); background: url("img/sky.svg") center top / 1600px 1000px repeat, radial-gradient(60% 90% at 88% 0%, rgba(207,220,79,.14), transparent 70%), linear-gradient(180deg, var(--hero-bg), var(--hero-bg-2)); }
   .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; }
   .brand { font: 600 1.25rem/1 var(--serif); color: var(--hero-ink); text-decoration: none; }
   .nav { display: flex; align-items: center; gap: 22px; }
