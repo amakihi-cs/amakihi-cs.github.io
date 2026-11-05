@@ -98,11 +98,11 @@
   .planet-red { width: 11px; top: 104px; left: 47%; }
   @media (max-width: 1239px) { .planet-blue { display: none; } }
   @media (max-width: 899px) { .planet-red { display: none; } }
-  @media (max-width: 719px) { .planet-giant { width: 40px; top: auto; bottom: 8px; right: 24px; } }
+  @media (max-width: 719px) { .planet-giant { width: 36px; top: 72px; right: 16px; } }
 
   /* A transiting planet, with its light curve drawn underneath (12 s cycle) */
   .transit { position: absolute; width: 80px; bottom: 6px; right: max(24px, calc((100% - 1080px) / 2 - 84px)); }
-  @media (max-width: 719px) { .transit { width: 54px; bottom: 6px; right: 100px; } }
+  @media (max-width: 719px) { .transit { width: 54px; bottom: 6px; right: 16px; } }
   .transit .tr-planet { animation: tr-cross 12s linear infinite; }
   .transit .tr-star { animation: tr-dim 12s linear infinite; }
   .transit .tr-dot { animation: tr-curve 12s linear infinite; }
@@ -124,8 +124,16 @@
   .flare { position: absolute; width: 64px; top: 73px; left: max(36px, calc((100% - 1080px) / 2 - 68px)); }
   @media (max-width: 719px) {
     .rv { width: 54px; left: 16px; }
-    .flare { width: 40px; top: auto; bottom: 10px; left: calc(50% - 62px); }
+    .flare { width: 36px; top: 72px; left: 16px; }
   }
+
+  /* Atmospheric escape: a planet trailing a comet-like helium tail along its orbit (12 s period) */
+  .escape { position: absolute; width: 80px; bottom: 6px; left: calc(50% - 40px); pointer-events: auto; }
+  @media (max-width: 719px) { .escape { width: 54px; left: calc(50% - 27px); } }
+  .escape .es-x { animation-name: es-x; animation-duration: 6s; }
+  .escape .es-y { animation-name: es-y; animation-duration: 6s; }
+  @keyframes es-x { from { transform: translateX(-26px); } to { transform: translateX(26px); } }
+  @keyframes es-y { from { transform: translateY(-6.5px); } to { transform: translateY(6.5px); } }
 
   /* Radial velocity: the star wobbles and is Doppler-tinted as its planet orbits (10 s period) */
   .sine { animation-timing-function: cubic-bezier(.37, 0, .63, 1); animation-direction: alternate; animation-iteration-count: infinite; animation-duration: 5s; }
@@ -169,6 +177,7 @@
     .rv .rv-star { fill: #9cc8ff; }
     .rv .rv-pt { opacity: 1; }
     .flare .fl-burst { opacity: 1; }
+    .escape .es-x, .escape .es-y { animation-play-state: paused; }
   }
 
   .topbar {
@@ -520,6 +529,37 @@
         <path d="M47.5 16.5 C52 8, 59 10, 55.5 18.5" fill="none" stroke="#fff3c9" stroke-width="1.6" stroke-linecap="round"/>
         <circle cx="48" cy="17.5" r="5.5" fill="url(#fl-hot)"/>
       </g>
+    </svg>
+    <svg class="escape" viewBox="0 0 80 72" focusable="false">
+      <title>Atmospheric escape: the planet loses its helium-rich atmosphere in a comet-like tail, seen in the 1083 nm helium line (WP4)</title>
+      <defs>
+        <radialGradient id="es-star" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#fff6de"/><stop offset=".65" stop-color="#ffd58f"/><stop offset="1" stop-color="#f0a050"/>
+        </radialGradient>
+        <radialGradient id="es-glow"><stop offset="0" stop-color="#ffe6b8" stop-opacity=".45"/><stop offset="1" stop-color="#ffe6b8" stop-opacity="0"/></radialGradient>
+        <radialGradient id="es-puff"><stop offset="0" stop-color="#b8e6ff" stop-opacity="1"/><stop offset=".55" stop-color="#9fd0ff" stop-opacity=".55"/><stop offset="1" stop-color="#9fd0ff" stop-opacity="0"/></radialGradient>
+        <clipPath id="es-far"><rect x="-20" y="-20" width="120" height="44"/></clipPath>
+      </defs>
+      <ellipse cx="40" cy="24" rx="26" ry="6.5" transform="rotate(-10 40 24)" fill="none" stroke="#a9c4ff" stroke-opacity=".2" stroke-width=".7" stroke-dasharray="2 2.5"/>
+      <circle cx="40" cy="24" r="15" fill="url(#es-glow)"/>
+      <circle cx="40" cy="24" r="8" fill="url(#es-star)"/>
+      <g transform="rotate(-10 40 24)">
+        <g transform="translate(40 24) scale(1.336) translate(-40 -24)" opacity="0.032"><g class="es-x sine" style="animation-delay:-11.96s"><g class="es-y sine" style="animation-delay:-14.96s"><circle cx="40" cy="24" r="7.44" fill="url(#es-puff)"/></g></g></g>
+        <g transform="translate(40 24) scale(1.308) translate(-40 -24)" opacity="0.065"><g class="es-x sine" style="animation-delay:-12.28s"><g class="es-y sine" style="animation-delay:-15.28s"><circle cx="40" cy="24" r="7.02" fill="url(#es-puff)"/></g></g></g>
+        <g transform="translate(40 24) scale(1.280) translate(-40 -24)" opacity="0.097"><g class="es-x sine" style="animation-delay:-12.60s"><g class="es-y sine" style="animation-delay:-15.60s"><circle cx="40" cy="24" r="6.60" fill="url(#es-puff)"/></g></g></g>
+        <g transform="translate(40 24) scale(1.252) translate(-40 -24)" opacity="0.129"><g class="es-x sine" style="animation-delay:-12.92s"><g class="es-y sine" style="animation-delay:-15.92s"><circle cx="40" cy="24" r="6.18" fill="url(#es-puff)"/></g></g></g>
+        <g transform="translate(40 24) scale(1.224) translate(-40 -24)" opacity="0.162"><g class="es-x sine" style="animation-delay:-13.24s"><g class="es-y sine" style="animation-delay:-16.24s"><circle cx="40" cy="24" r="5.76" fill="url(#es-puff)"/></g></g></g>
+        <g transform="translate(40 24) scale(1.196) translate(-40 -24)" opacity="0.194"><g class="es-x sine" style="animation-delay:-13.56s"><g class="es-y sine" style="animation-delay:-16.56s"><circle cx="40" cy="24" r="5.34" fill="url(#es-puff)"/></g></g></g>
+        <g transform="translate(40 24) scale(1.168) translate(-40 -24)" opacity="0.226"><g class="es-x sine" style="animation-delay:-13.88s"><g class="es-y sine" style="animation-delay:-16.88s"><circle cx="40" cy="24" r="4.92" fill="url(#es-puff)"/></g></g></g>
+        <g transform="translate(40 24) scale(1.140) translate(-40 -24)" opacity="0.258"><g class="es-x sine" style="animation-delay:-14.20s"><g class="es-y sine" style="animation-delay:-17.20s"><circle cx="40" cy="24" r="4.50" fill="url(#es-puff)"/></g></g></g>
+        <g transform="translate(40 24) scale(1.112) translate(-40 -24)" opacity="0.291"><g class="es-x sine" style="animation-delay:-14.52s"><g class="es-y sine" style="animation-delay:-17.52s"><circle cx="40" cy="24" r="4.08" fill="url(#es-puff)"/></g></g></g>
+        <g transform="translate(40 24) scale(1.084) translate(-40 -24)" opacity="0.323"><g class="es-x sine" style="animation-delay:-14.84s"><g class="es-y sine" style="animation-delay:-17.84s"><circle cx="40" cy="24" r="3.66" fill="url(#es-puff)"/></g></g></g>
+        <g transform="translate(40 24) scale(1.056) translate(-40 -24)" opacity="0.355"><g class="es-x sine" style="animation-delay:-15.16s"><g class="es-y sine" style="animation-delay:-18.16s"><circle cx="40" cy="24" r="3.24" fill="url(#es-puff)"/></g></g></g>
+        <g transform="translate(40 24) scale(1.028) translate(-40 -24)" opacity="0.388"><g class="es-x sine" style="animation-delay:-15.48s"><g class="es-y sine" style="animation-delay:-18.48s"><circle cx="40" cy="24" r="2.82" fill="url(#es-puff)"/></g></g></g>
+        <g class="es-x sine" style="animation-delay:-3.80s"><g class="es-y sine" style="animation-delay:-6.80s"><circle cx="40" cy="24" r="2.6" fill="#2b3a5c" stroke="#9fd8ff" stroke-opacity=".6" stroke-width=".5"/></g></g>
+      </g>
+      <!-- the far half of the star disk drawn again on top: it hides whatever passes behind the star -->
+      <g transform="rotate(-10 40 24)"><circle cx="40" cy="24" r="8" fill="url(#es-star)" clip-path="url(#es-far)"/></g>
     </svg>
     <svg class="transit" viewBox="0 0 80 72" focusable="false">
       <title>A transiting planet: the star dims as the planet passes in front of it (WP1, WP2, WP4)</title>
