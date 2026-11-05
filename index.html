@@ -116,10 +116,11 @@
   /* Shared placement of the three little science icons, in the band below the key figures */
   .transit, .rv, .flare { pointer-events: auto; }
   .rv { position: absolute; width: 80px; bottom: 6px; left: calc(50% - 40px); }
-  .flare { position: absolute; width: 80px; bottom: 6px; left: max(24px, calc((100% - 1080px) / 2 - 84px)); }
+  /* the flaring M dwarf mirrors the ringed planet, on the other side of the header */
+  .flare { position: absolute; width: 64px; top: 73px; left: max(36px, calc((100% - 1080px) / 2 - 68px)); }
   @media (max-width: 719px) {
     .rv { width: 54px; left: calc(50% - 60px); }
-    .flare { width: 54px; left: calc(50% + 4px); }
+    .flare { width: 40px; top: auto; bottom: 10px; left: calc(50% + 8px); }
   }
 
   /* Radial velocity: the star wobbles and is Doppler-tinted as its planet orbits (10 s period) */
@@ -127,51 +128,43 @@
   .rv .rv-px { animation-name: rv-px; }
   .rv .rv-py { animation-name: rv-py; animation-delay: -2.5s; }
   .rv .rv-wobble { animation-name: rv-wobble; }
-  .rv .rv-dot-y { animation-name: rv-dot-y; }
-  .rv .rv-dot-x { animation: rv-dot-x 10s linear infinite; }
   .rv .rv-star { animation: rv-doppler 10s linear infinite; }
   @keyframes rv-px { from { transform: translateX(-30px); } to { transform: translateX(30px); } }
   @keyframes rv-py { from { transform: translateY(-16px); } to { transform: translateY(16px); } }
   @keyframes rv-wobble { from { transform: translateX(3px); } to { transform: translateX(-3px); } }
-  @keyframes rv-dot-y { from { transform: translateY(0); } to { transform: translateY(12px); } }
-  @keyframes rv-dot-x { from { transform: translateX(0); } to { transform: translateX(64px); } }
+  .rv .rv-pt { opacity: 0; transform-box: fill-box; transform-origin: center; animation-duration: 10s; animation-timing-function: linear; animation-iteration-count: infinite; }
+  @keyframes rv-pt-0 { 0%, 6.0% { opacity: 0; transform: scale(1.8); } 8.0%, 96% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  @keyframes rv-pt-1 { 0%, 13.9% { opacity: 0; transform: scale(1.8); } 15.9%, 96% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  @keyframes rv-pt-2 { 0%, 18.7% { opacity: 0; transform: scale(1.8); } 20.7%, 96% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  @keyframes rv-pt-3 { 0%, 28.9% { opacity: 0; transform: scale(1.8); } 30.9%, 96% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  @keyframes rv-pt-4 { 0%, 32.3% { opacity: 0; transform: scale(1.8); } 34.3%, 96% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  @keyframes rv-pt-5 { 0%, 40.7% { opacity: 0; transform: scale(1.8); } 42.7%, 96% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  @keyframes rv-pt-6 { 0%, 49.3% { opacity: 0; transform: scale(1.8); } 51.3%, 96% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  @keyframes rv-pt-7 { 0%, 53.1% { opacity: 0; transform: scale(1.8); } 55.1%, 96% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  @keyframes rv-pt-8 { 0%, 62.7% { opacity: 0; transform: scale(1.8); } 64.7%, 96% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  @keyframes rv-pt-9 { 0%, 68.1% { opacity: 0; transform: scale(1.8); } 70.1%, 96% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  @keyframes rv-pt-10 { 0%, 73.7% { opacity: 0; transform: scale(1.8); } 75.7%, 96% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  @keyframes rv-pt-11 { 0%, 80.8% { opacity: 0; transform: scale(1.8); } 82.8%, 96% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+  @keyframes rv-pt-12 { 0%, 87.1% { opacity: 0; transform: scale(1.8); } 89.1%, 96% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
   @keyframes rv-doppler { 0%, 100% { fill: #ff9d84; } 25%, 75% { fill: #fff1d6; } 50% { fill: #9cc8ff; } }
 
   /* Flare on an M dwarf: fast rise, slow decay (8 s cycle) */
   .flare .fl-burst { animation: fl-burst 8s linear infinite; }
-  .flare .fl-dot { animation: fl-dot 8s linear infinite; }
   @keyframes fl-burst {
     0%, 25% { opacity: 0; } 28.1% { opacity: 1; } 35% { opacity: .55; }
     45% { opacity: .2; } 55% { opacity: .05; } 60%, 100% { opacity: 0; }
-  }
-  @keyframes fl-dot {
-    0.0% { transform: translate(0.0px, 0px); }
-    25.0% { transform: translate(16.0px, 0px); }
-    28.1% { transform: translate(18.0px, -13px); }
-    30.0% { transform: translate(19.2px, -9.5px); }
-    32.0% { transform: translate(20.5px, -7.2px); }
-    35.0% { transform: translate(22.4px, -5px); }
-    38.0% { transform: translate(24.3px, -3.5px); }
-    42.0% { transform: translate(26.9px, -2.2px); }
-    50.0% { transform: translate(32.0px, -0.9px); }
-    60.0% { transform: translate(38.4px, -0.3px); }
-    70.0% { transform: translate(44.8px, 0px); }
-    100.0% { transform: translate(64.0px, 0px); }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .transit .tr-planet, .transit .tr-star, .transit .tr-dot { animation: none; }
     .transit .tr-star { opacity: .8; }
     .transit .tr-dot { transform: translate(32px, 8.25px); }
-    .rv .rv-px, .rv .rv-py, .rv .rv-wobble, .rv .rv-dot-y, .rv .rv-dot-x, .rv .rv-star,
-    .flare .fl-burst, .flare .fl-dot { animation: none; }
+    .rv .rv-px, .rv .rv-py, .rv .rv-wobble, .rv .rv-star, .rv .rv-pt, .flare .fl-burst { animation: none; }
     .rv .rv-px { transform: translateX(30px); }
     .rv .rv-wobble { transform: translateX(-3px); }
     .rv .rv-star { fill: #9cc8ff; }
-    .rv .rv-dot-x { transform: translateX(32px); }
-    .rv .rv-dot-y { transform: translateY(12px); }
+    .rv .rv-pt { opacity: 1; }
     .flare .fl-burst { opacity: 1; }
-    .flare .fl-dot { transform: translate(18px, -13px); }
   }
 
   .topbar {
@@ -396,7 +389,7 @@
       <circle cx="15" cy="15" r="11" fill="url(#pl-blue)"/>
     </svg>
     <svg class="rv" viewBox="0 0 80 72" focusable="false">
-      <title>Radial velocity: the orbiting planet makes its star wobble, towards us and away; dots are noisy measurements with their error bars (WP1, WP2)</title>
+      <title>Radial velocity: the orbiting planet makes its star wobble, towards us and away; measurements with their error bars pile up over each orbit (WP1, WP2)</title>
       <defs>
         <radialGradient id="rv-glow"><stop offset="0" stop-color="#fff1d6" stop-opacity=".4"/><stop offset="1" stop-color="#fff1d6" stop-opacity="0"/></radialGradient>
       </defs>
@@ -410,27 +403,23 @@
           <circle cx="40" cy="22" r="3.2" fill="#6fc3ff"/>
         </g></g>
       </g>
-      <polyline points="8.0,52.00 10.0,52.12 12.0,52.46 14.0,53.01 16.0,53.76 18.0,54.67 20.0,55.70 22.0,56.83 24.0,58.00 26.0,59.17 28.0,60.30 30.0,61.33 32.0,62.24 34.0,62.99 36.0,63.54 38.0,63.88 40.0,64.00 42.0,63.88 44.0,63.54 46.0,62.99 48.0,62.24 50.0,61.33 52.0,60.30 54.0,59.17 56.0,58.00 58.0,56.83 60.0,55.70 62.0,54.67 64.0,53.76 66.0,53.01 68.0,52.46 70.0,52.12 72.0,52.00" fill="none" stroke="#cfdc4f" stroke-opacity=".6" stroke-width=".9" stroke-linejoin="round"/>
-      <g class="rv-data" stroke="#eef1e6" stroke-opacity=".5" stroke-width=".6" fill="#eef1e6" fill-opacity=".9">
-        <line x1="19.2" y1="55.3" x2="19.2" y2="57.8"/><circle cx="19.2" cy="56.6" r="1"/>
-        <line x1="23.5" y1="56.0" x2="23.5" y2="59.4"/><circle cx="23.5" cy="57.7" r="1"/>
-        <line x1="24.2" y1="57.8" x2="24.2" y2="61.0"/><circle cx="24.2" cy="59.4" r="1"/>
-        <line x1="33.7" y1="61.7" x2="33.7" y2="64.4"/><circle cx="33.7" cy="63.1" r="1"/>
-        <line x1="40.1" y1="63.4" x2="40.1" y2="66.5"/><circle cx="40.1" cy="65.0" r="1"/>
-        <line x1="43.0" y1="64.1" x2="43.0" y2="66.6"/><circle cx="43.0" cy="65.3" r="1"/>
-        <line x1="43.2" y1="64.5" x2="43.2" y2="67.6"/><circle cx="43.2" cy="66.1" r="1"/>
-        <line x1="45.3" y1="61.2" x2="45.3" y2="63.5"/><circle cx="45.3" cy="62.4" r="1"/>
-        <line x1="47.9" y1="58.0" x2="47.9" y2="61.1"/><circle cx="47.9" cy="59.6" r="1"/>
-        <line x1="54.2" y1="58.7" x2="54.2" y2="61.3"/><circle cx="54.2" cy="60.0" r="1"/>
-        <line x1="59.7" y1="57.3" x2="59.7" y2="60.5"/><circle cx="59.7" cy="58.9" r="1"/>
-        <line x1="66.2" y1="51.1" x2="66.2" y2="54.3"/><circle cx="66.2" cy="52.7" r="1"/>
-        <line x1="68.7" y1="49.9" x2="68.7" y2="53.1"/><circle cx="68.7" cy="51.5" r="1"/>
+      <g class="rv-data" stroke="#cfdc4f" stroke-opacity=".85" stroke-width=".75" stroke-linecap="round" fill="#cfdc4f">
+        <g class="rv-pt" style="animation-name:rv-pt-0"><path d="M11.8 50.5V53.7M10.8 50.5h2M10.8 53.7h2"/><circle cx="11.8" cy="52.1" r="1.15"/></g>
+        <g class="rv-pt" style="animation-name:rv-pt-1"><path d="M16.9 50.4V54.6M15.9 50.4h2M15.9 54.6h2"/><circle cx="16.9" cy="52.5" r="1.15"/></g>
+        <g class="rv-pt" style="animation-name:rv-pt-2"><path d="M20.0 53.8V57.8M19.0 53.8h2M19.0 57.8h2"/><circle cx="20.0" cy="55.8" r="1.15"/></g>
+        <g class="rv-pt" style="animation-name:rv-pt-3"><path d="M26.5 57.2V60.6M25.5 57.2h2M25.5 60.6h2"/><circle cx="26.5" cy="58.9" r="1.15"/></g>
+        <g class="rv-pt" style="animation-name:rv-pt-4"><path d="M28.7 59.4V63.3M27.7 59.4h2M27.7 63.3h2"/><circle cx="28.7" cy="61.3" r="1.15"/></g>
+        <g class="rv-pt" style="animation-name:rv-pt-5"><path d="M34.0 63.2V66.4M33.0 63.2h2M33.0 66.4h2"/><circle cx="34.0" cy="64.8" r="1.15"/></g>
+        <g class="rv-pt" style="animation-name:rv-pt-6"><path d="M39.5 65.0V68.8M38.5 65.0h2M38.5 68.8h2"/><circle cx="39.5" cy="66.9" r="1.15"/></g>
+        <g class="rv-pt" style="animation-name:rv-pt-7"><path d="M42.0 61.3V64.2M41.0 61.3h2M41.0 64.2h2"/><circle cx="42.0" cy="62.8" r="1.15"/></g>
+        <g class="rv-pt" style="animation-name:rv-pt-8"><path d="M48.1 56.6V60.4M47.1 56.6h2M47.1 60.4h2"/><circle cx="48.1" cy="58.5" r="1.15"/></g>
+        <g class="rv-pt" style="animation-name:rv-pt-9"><path d="M51.6 59.5V62.8M50.6 59.5h2M50.6 62.8h2"/><circle cx="51.6" cy="61.2" r="1.15"/></g>
+        <g class="rv-pt" style="animation-name:rv-pt-10"><path d="M55.2 59.3V63.4M54.2 59.3h2M54.2 63.4h2"/><circle cx="55.2" cy="61.3" r="1.15"/></g>
+        <g class="rv-pt" style="animation-name:rv-pt-11"><path d="M59.7 52.2V56.2M58.7 52.2h2M58.7 56.2h2"/><circle cx="59.7" cy="54.2" r="1.15"/></g>
+        <g class="rv-pt" style="animation-name:rv-pt-12"><path d="M63.8 49.2V53.1M62.8 49.2h2M62.8 53.1h2"/><circle cx="63.8" cy="51.1" r="1.15"/></g>
       </g>
-      <g class="rv-dot-x"><g class="rv-dot-y sine">
-        <circle cx="8" cy="52" r="1.8" fill="#cfdc4f"/>
-      </g></g>
     </svg>
-    <svg class="flare" viewBox="0 0 80 72" focusable="false">
+    <svg class="flare" viewBox="14 0 52 50" focusable="false">
       <title>A flare on an M dwarf: sudden brightening, slow decay (WP1, WP5)</title>
       <defs>
         <radialGradient id="fl-disk" cx="45%" cy="42%" r="60%">
@@ -448,8 +437,6 @@
         <path d="M47.5 16.5 C52 8, 59 10, 55.5 18.5" fill="none" stroke="#fff3c9" stroke-width="1.6" stroke-linecap="round"/>
         <circle cx="48" cy="17.5" r="5.5" fill="url(#fl-hot)"/>
       </g>
-      <polyline points="8.0,62.0 24.0,62.0 26.0,49.0 27.2,52.5 28.5,54.8 30.4,57.0 32.3,58.5 34.9,59.8 40.0,61.1 46.4,61.7 52.8,62.0 72.0,62.0" fill="none" stroke="#cfdc4f" stroke-opacity=".7" stroke-width="1.1" stroke-linejoin="round"/>
-      <circle class="fl-dot" cx="8" cy="62" r="1.8" fill="#cfdc4f"/>
     </svg>
     <svg class="transit" viewBox="0 0 80 72" focusable="false">
       <title>A transiting planet: the star dims as the planet passes in front of it (WP1, WP2, WP4)</title>
