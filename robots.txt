@@ -1,0 +1,7 @@
+# Amakihi community survey, https://amakihi-cs.github.io/
+# Everything may be crawled. The password-protected team pages (/team/) carry a
+# noindex tag instead of a Disallow line, so that search engines can see it.
+User-agent: *
+Allow: /
+
+Sitemap: https://amakihi-cs.github.io/sitemap.xml

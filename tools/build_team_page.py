@@ -184,6 +184,22 @@ def build(wiki):
     ), len(articles)
 
 
+NOINDEX = '<meta name="robots" content="noindex, nofollow" />'
+
+
+def add_noindex(path):
+    """Put a noindex tag in StatiCrypt's password page (the one crawlers see).
+
+    The clear template has one too, but it is inside the encrypted payload."""
+    text = path.read_text(encoding="utf-8")
+    if NOINDEX in text:
+        return
+    anchor = '<meta charset="utf-8" />'
+    if anchor not in text:
+        sys.exit(f"No {anchor} in {path}: cannot add the noindex tag")
+    path.write_text(text.replace(anchor, f"{anchor}\n        {NOINDEX}", 1), encoding="utf-8")
+
+
 def main():
     global MAILMAP
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
@@ -236,6 +252,7 @@ def main():
             cwd=REPO, env={**os.environ, "STATICRYPT_PASSWORD": password}, capture_output=True, text=True)
         if run.returncode:
             sys.exit(f"StatiCrypt failed:\n{run.stdout}{run.stderr}")
+    add_noindex(out_dir / "index.html")
     stamp.write_text(digest + "\n")
     print(f"Compiled {n_pages} wiki pages into {out_dir / 'index.html'} (encrypted)")
 

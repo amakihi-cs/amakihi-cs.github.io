@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Public pages of https://amakihi-cs.github.io/. Add any new public page here;
+     team/ stays out (password protected, noindex). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://amakihi-cs.github.io/</loc>
+    <image:image><image:loc>https://amakihi-cs.github.io/img/amakihi_puu_laau.jpg</image:loc></image:image>
+    <image:image><image:loc>https://amakihi-cs.github.io/img/amakihi_puu_oo.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://amakihi-cs.github.io/publications.html</loc>
+  </url>
+</urlset>

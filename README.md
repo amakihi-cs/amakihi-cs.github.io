@@ -14,8 +14,22 @@ proposals, data, e-mails, member lists, the team password, or any wiki content i
 | `team/source.sha256` | hash of the clear team page, so that an unchanged wiki is not re-encrypted |
 | `tools/` | the two page generators, their template, data and StatiCrypt salt |
 | `.nojekyll` | serve the files as they are, without Jekyll |
+| `robots.txt`, `sitemap.xml` | for search engines (see below) |
+| `google174a4d5d22c80e8f.html` | Google Search Console ownership check: keep it |
 
 GitHub Pages publishes `main` from the repository root.
+
+## Search engines
+
+`robots.txt` lets every crawler in and points to `sitemap.xml`, which lists the public pages
+(`/` and `publications.html`). **A new public page must be added to `sitemap.xml`**, and its head
+should carry the same tags as the other two: a `canonical` link, the Open Graph / Twitter tags
+(title, description, URL, photo) and, where it helps, a JSON-LD block. For `publications.html`
+these tags live in `tools/build_publications.py`. The team pages are kept out of search results
+by a `noindex` tag that `tools/build_team_page.py` writes into StatiCrypt's password page; they
+are deliberately not blocked in `robots.txt`, since a crawler must fetch a page to see its
+`noindex`. Results and indexing problems show up in Google Search Console (property
+`https://amakihi-cs.github.io/`).
 
 ## Team pages
 

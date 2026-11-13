@@ -138,6 +138,35 @@ TEMPLATE = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ʻAmakihi publications</title>
 <meta name="description" content="Publications of the ʻAmakihi community survey and the recent ESPaDOnS and SPIRou work it builds on.">
+<link rel="canonical" href="https://amakihi-cs.github.io/publications.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ʻAmakihi survey">
+<meta property="og:title" content="ʻAmakihi publications">
+<meta property="og:description" content="Publications of the ʻAmakihi community survey and the recent ESPaDOnS and SPIRou work it builds on.">
+<meta property="og:url" content="https://amakihi-cs.github.io/publications.html">
+<meta property="og:image" content="https://amakihi-cs.github.io/img/amakihi_puu_laau.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="A bright yellow Hawaiʻi ʻamakihi perched on a branch, against a soft green forest background.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "CollectionPage",
+ "@id": "https://amakihi-cs.github.io/publications.html",
+ "url": "https://amakihi-cs.github.io/publications.html",
+ "name": "ʻAmakihi publications",
+ "description": "Publications of the ʻAmakihi community survey and the recent ESPaDOnS and SPIRou work it builds on.",
+ "inLanguage": "en",
+ "isPartOf": {
+  "@id": "https://amakihi-cs.github.io/#website"
+ },
+ "about": {
+  "@id": "https://amakihi-cs.github.io/#survey"
+ }
+}
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230d1726'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23cfdc4f'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
